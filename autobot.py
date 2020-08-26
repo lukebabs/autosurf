@@ -11,7 +11,7 @@ def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:],"u:i:")
         for opt, arg in opts:
-            if opt == '-u':
+            if opt == '-h':
                 url = str(arg)
             elif opt == '-i':
                 try:
@@ -19,7 +19,7 @@ def main():
                 except ValueError:
                     print ("Enter a valid number for trials")
     except getopt.GetoptError as e:
-        print (e, 'python autosurf.py -u <Host> -i <No of Trials>')
+        print (e, 'python autosurf.py -h <Host> -i <No of Trials>')
         sys.exit(2)
 
     #Start automated browsing after validating the url
@@ -54,8 +54,8 @@ def login(url):
         element.send_keys(Keys.RETURN)
         driver.close()
     except:
-        time.sleep(1)
-        # print(driver.get_network_conditions) - test here
+        time.sleep(1) #slight delay to closely simulate a real browser
+        print(driver.get_network_conditions)
         driver.close()
         return
 
