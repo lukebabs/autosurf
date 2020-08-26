@@ -3,7 +3,6 @@ import os
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
 import sys, getopt
-import pandas as pd
 import validators
 
 def main():
