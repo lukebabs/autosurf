@@ -67,25 +67,29 @@ def humanbot(url):
     driver.get(url)
 
     time.sleep(1)
-    element = driver.find_element_by_name('ticker')
-    element.send_keys("AAPL")
-    element.send_keys(Keys.RETURN)
-    time.sleep(2)
 
-    soup = BeautifulSoup(driver.page_source, 'lxml')
-    driver.quit()
-
+    try:
+        element = driver.find_element_by_name('ticker')
+        element.send_keys("AAPL")
+        element.send_keys(Keys.RETURN)
+        time.sleep(2)
+        soup = BeautifulSoup(driver.page_source, 'lxml')
+        driver.quit()
     # Find table on the page and start scraping
-    tab_data = soup.select('table')[1]
-    n = 0
-    item = []
-    while n <= 5:
-        for items in tab_data.select('tr'):
-            item = [elem.text for elem in items.select('th,td')]
-            item.append
-        n += 1
-        print (item)
-        # print(' '.join(item))
+        tab_data = soup.select('table')[1]
+        n = 0
+        item = []
+        scraped_data = "./data/scraped.csv"
+        while n <= 5:
+            for items in tab_data.select('tr'):
+                item = [elem.text for elem in items.select('th,td')]
+                item.append
+            n += 1
+            print (item)
+            df = pd.DataFrame(item)
+            df.to_csv('./data/scraped.csv', index=False, header=False)
+    except:
+        print ("Could not access the page. Check that for firewalls")
 
 
 def auto_surf(url, trials):
@@ -99,6 +103,7 @@ def auto_surf(url, trials):
 
 def cred_spray():
     with open('./data/accounts.txt', 'r') as f:
+        new_list = []
         for line in f:
             combo = line.strip('\r\n').split(':')
             username = combo[0]
@@ -108,12 +113,36 @@ def cred_spray():
                 'username': username,
                 'password': password,
             }
-            # response = requests.get(
-            #     'http://localhost:5000/login', params=params)
-            # if response.content == 'SUCCESS':
-            #     print response.content, ' --> ', username, ':', password
-            print (params)
+            new_list.append(params)
+        return new_list
+
+def menu():
+    menu=True
+    while menu:
+        print("""
+        ** Caution: Still under development.
+        This tool is not intended to be used for nefarious activities.
+        The solve purpose of its inception is to measure show the value of in-depth web application security
+
+        1. Launch Automated Surfing - under construction
+        2. Scrape Content - scrapes tables
+        3. Credential Stuffing Attack - under construction
+        4. Exit/Quit
+        """)
+        menu=input("What would you like to do? ")
+        if menu=="1":
+            print("\nLaunch Automated Surfing")
+            main()
+        elif menu=="2":
+            print("\n Scrape Content")
+            main()
+        elif menu=="3":
+            print("\n Credential Stuffing Attack")
+            main()
+        elif menu=="4" or "q":
+            break
+        elif menu == None:
+            print("\n Not Valid Choice Try again")
 
 if __name__ == "__main__":
-    main()
-    # cred_spray() #Still under development. Will introduce multithreading
+    menu()
