@@ -30,7 +30,7 @@ def main():
         auto_surf(url, trials)
     else:
         print ("Check the innput parameters for url and no. of trials")
-        print (e, 'python wafautosurf.py -u <Host URL> -t <No of Trials>')
+        print ('python wafautosurf.py -u <Host URL> -t <No of Trials>')
 
 def set_driver():
     option = webdriver.ChromeOptions()
