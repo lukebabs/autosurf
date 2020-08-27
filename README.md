@@ -25,5 +25,6 @@ Provide the path for the driver that is required to connect with local broswer. 
 
 # Human Bot
 Added human bot to the toolset. This will be used to scape the site under chrome driver and with time delays to simulate slow surfing by human.
+
     def humanbot()
 
