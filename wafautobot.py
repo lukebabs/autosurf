@@ -65,9 +65,10 @@ def login(url):
 def humanbot(url):
     driver = set_driver()
     driver.get(url)
-
     time.sleep(1)
 
+    # Start the browser, input a search, and look for tables
+    # In this example, we are using AAPL as the input criteria
     try:
         element = driver.find_element_by_name('ticker')
         element.send_keys("AAPL")
@@ -95,7 +96,6 @@ def humanbot(url):
 def auto_surf(url, trials):
     n = 1
     while n <= trials:
-        # login(url)
         humanbot(url)
         n += 1
         print (f'Round {n-1} of {trials} automated browsing of {url}')
