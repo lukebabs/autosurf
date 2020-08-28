@@ -32,6 +32,20 @@ To automatically install packages, use the following:
     -u = Host URL
     -t = How many session iterations. Setting up a limit helps to control WAF testing in a functional way without turning the exercise into brite force.
 
+    Application menu:
+    
+        MBP:autosurf$ python3 wafautobot.py -u http://www.zetty.me -t 2
+
+            ** Caution: Still under development.
+            This tool is not intended to be used for nefarious activities.
+            The solve purpose of its inception is to measure show the value of in-depth web application security
+
+            1. Automated Human-like Surfing - under construction
+            2. Scrape Content - scrapes tables
+            3. Credential Stuffing Attack - under construction
+            4. Exit/Quit
+
+
 # Setting up Selenium
 Download full program package which should include two directories - data and drivers.
 
