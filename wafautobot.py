@@ -38,10 +38,8 @@ def set_driver():
     option.add_argument("-incognito")
     plt = platform.system()
     try:
-        '''Provide the path for the driver that is required to connect with local broswer
-        By default, it is assumed that Chrome is install on the test machine.
-        With driver downloaded from https://chromedriver.chromium.org/
-        and placed inside /usr/bin/local on a mac. For Windows, simply change the path'''
+        '''Drivers downloaded from https://chromedriver.chromium.org/
+        and placed inside ./drivers/ or .\drivers\.'''
         if plt == 'Darwin':
             browser = webdriver.Chrome(executable_path="./drivers/chromedriver", options=option)
             return browser
