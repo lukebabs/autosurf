@@ -1,5 +1,6 @@
 import time
 import os
+import platform
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
 import sys, getopt
@@ -35,13 +36,21 @@ def main():
 def set_driver():
     option = webdriver.ChromeOptions()
     option.add_argument("-incognito")
+    plt = platform.system()
     try:
         '''Provide the path for the driver that is required to connect with local broswer
         By default, it is assumed that Chrome is install on the test machine.
         With driver downloaded from https://chromedriver.chromium.org/
         and placed inside /usr/bin/local on a mac. For Windows, simply change the path'''
-        browser = webdriver.Chrome(executable_path="./drivers/chromedriver", options=option)
-        return browser
+        if plt == 'Darwin':
+            browser = webdriver.Chrome(executable_path="./drivers/chromedriver", options=option)
+            return browser
+        elif plt == 'Linux':
+            browser = webdriver.Chrome(executable_path="./drivers/chromedriver-2", options=option)
+            return browser
+        elif plt == 'Windows':
+            browser = webdriver.Chrome(executable_path=".\drivers\chromedriver.exe", options=option)
+            return browser
     except:
         print ("Place driver for browser in /usr/local/bin. This can be downloaded from https://chromedriver.chromium.org/")
         return
