@@ -8,21 +8,21 @@ This tool contains various testing options
 
 # Requirements
 The following are the required libraries for the program:
-    beautifulsoup4==4.9.1
-    bs4==0.0.1
-    decorator==4.4.2
-    numpy==1.19.1
-    pandas==1.1.1
-    python-dateutil==2.8.1
-    pytz==2020.1
-    selenium==3.141.0
-    six==1.15.0
-    soupsieve==2.0.1
-    urllib3==1.25.10
-    validators==0.18.0
+        beautifulsoup4==4.9.1
+        bs4==0.0.1
+        decorator==4.4.2
+        numpy==1.19.1
+        pandas==1.1.1
+        python-dateutil==2.8.1
+        pytz==2020.1
+        selenium==3.141.0
+        six==1.15.0
+        soupsieve==2.0.1
+        urllib3==1.25.10
+        validators==0.18.0
 
 To automatically install packages, use the following:
-    pip3 install -r requirements.txt
+        pip3 install -r requirements.txt
 
 # Initial usage
     python3 wafautosurf.py -u https://www.google.com -t 1
