@@ -97,7 +97,7 @@ def humanbot(url):
             df = pd.DataFrame(item)
             df.to_csv('./data/scraped.csv', index=False, header=False)
     except:
-        print ("Could not access the page. Check that for firewalls")
+        print ("**ALERT** wafautobot could not access the page. Check that the site is active")
 
 
 def auto_surf(url, trials):
