@@ -56,20 +56,20 @@ def select_browser():
         return
 
 def login(username, password):
-    # driver = select_browser()
-    # driver.get (url)
-    # try:
-    #     time.sleep(2)
-    #     driver.find_element_by_name('username').send_keys(username)
-    #     element = driver.find_element_by_name('password')
-    #     element.send_keys(password)
-    #     element.send_keys(Keys.RETURN)
-    #     # driver.close()
-    # except:
-    #     time.sleep(1) #slight delay to closely simulate a real browser
-    #     print(driver.get_network_conditions)
-    #     # driver.close()
-    #     return
+    driver = select_browser()
+    driver.get (url)
+    try:
+        time.sleep(2)
+        driver.find_element_by_name('username').send_keys(username)
+        element = driver.find_element_by_name('password')
+        element.send_keys(password)
+        element.send_keys(Keys.RETURN)
+        # driver.close()
+    except:
+        time.sleep(1) #slight delay to closely simulate a real browser
+        print(driver.get_network_conditions)
+        # driver.close()
+        return
 
     print (username, password)
 
@@ -79,9 +79,10 @@ def scrape_data(url):
     time.sleep(1)
 
     
-# Find table on the page and start scraping
-    # Start the browser, input a search, and look for tables
-    # In this example, we are using AAPL as the input criteria
+# Find the first table on the page and start scraping - 
+# not too sophisticated but should be good enough for illustration
+    '''Start the browser, input a search, and look for tables
+    In this example, we are using AAPL as the input criteria'''
     try:
         element = driver.find_element_by_name('ticker')
         element.send_keys("AAPL")
