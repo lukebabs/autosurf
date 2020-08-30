@@ -67,11 +67,9 @@ def login(username, password):
         # driver.close()
     except:
         time.sleep(1) #slight delay to closely simulate a real browser
-        print(driver.get_network_conditions)
+        print("Tried {} as username and {} as password".format(username, password))
         # driver.close()
         return
-
-    print (username, password)
 
 def scrape_data(url):
     driver = select_browser()
@@ -125,10 +123,10 @@ def cred_spray():
             username = combo[0]
             password = combo[1]
 
-            params = {
-                'username': username,
-                'password': password,
-            }
+            # params = {
+            #     'username': username,
+            #     'password': password,
+            # }
             login(username, password)
         return
 
@@ -145,6 +143,7 @@ def menu():
         3. Credential Stuffing Attack - under construction
         4. Exit/Quit
         """)
+
         menu=input("What would you like to do? ")
         if menu=="1":
             print("\nLaunching Automated Surfing")
