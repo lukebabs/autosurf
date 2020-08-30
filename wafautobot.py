@@ -22,18 +22,20 @@ def main():
                     trials = int(arg)
                 except ValueError:
                     print ("Enter a valid number for trials")
+                return url, trials  #returns these variables to be used as inputs in other functions
     except getopt.GetoptError as e:
         print (e, 'python wafautosurf.py -u <Host URL> -t <No of Trials>')
         sys.exit(2)
 
+def bot_broswing(url, trials):
     #Start automated browsing after validating the url
     if validators.url(url) and trials > 0:
         auto_surf(url, trials)
     else:
-        print ("Check the innput parameters for url and no. of trials")
+        print ("Check the input parameters for url and no. of trials")
         print ('python wafautosurf.py -u <Host URL> -t <No of Trials>')
 
-def set_driver():
+def select_browser():
     option = webdriver.ChromeOptions()
     option.add_argument("-incognito")
     plt = platform.system()
@@ -53,27 +55,31 @@ def set_driver():
         print ("Place driver for browser in /usr/local/bin. This can be downloaded from https://chromedriver.chromium.org/")
         return
 
-def login(url):
-    driver = set_driver()
-    driver.get (url)
-    try:
-        time.sleep(2)
-        driver.find_element_by_name('username').send_keys("random")
-        element = driver.find_element_by_name('password')
-        element.send_keys('bad_password')
-        element.send_keys(Keys.RETURN)
-        driver.close()
-    except:
-        time.sleep(1) #slight delay to closely simulate a real browser
-        print(driver.get_network_conditions)
-        driver.close()
-        return
+def login(username, password):
+    # driver = select_browser()
+    # driver.get (url)
+    # try:
+    #     time.sleep(2)
+    #     driver.find_element_by_name('username').send_keys(username)
+    #     element = driver.find_element_by_name('password')
+    #     element.send_keys(password)
+    #     element.send_keys(Keys.RETURN)
+    #     # driver.close()
+    # except:
+    #     time.sleep(1) #slight delay to closely simulate a real browser
+    #     print(driver.get_network_conditions)
+    #     # driver.close()
+    #     return
 
-def humanbot(url):
-    driver = set_driver()
+    print (username, password)
+
+def scrape_data(url):
+    driver = select_browser()
     driver.get(url)
     time.sleep(1)
 
+    
+# Find table on the page and start scraping
     # Start the browser, input a search, and look for tables
     # In this example, we are using AAPL as the input criteria
     try:
@@ -83,34 +89,36 @@ def humanbot(url):
         time.sleep(2)
         soup = BeautifulSoup(driver.page_source, 'lxml')
         driver.quit()
+
     # Find table on the page and start scraping
         tab_data = soup.select('table')[1]
+
+        #Parse the data from the table to CSV using pandas library
         n = 0
         item = []
         scraped_data = "./data/scraped.csv"
-        while n <= 5:
+        while n <= 5: #Scrape the first 5 rows (this is enough for illustration)
             for items in tab_data.select('tr'):
                 item = [elem.text for elem in items.select('th,td')]
                 item.append
             n += 1
             print (item)
             df = pd.DataFrame(item)
-            df.to_csv('./data/scraped.csv', index=False, header=False)
-    except:
-        print ("**ALERT** wafautobot could not access the page. Check that the site is active")
+            df.to_csv(scraped_data, index=False, header=False)
+    except ValueError as e:
+        print (e, "**ALERT** wafautobot could not access the page. Check that the site is active")
 
 
 def auto_surf(url, trials):
     n = 1
     while n <= trials:
-        humanbot(url)
+        scrape_data(url)
         n += 1
         print (f'Round {n-1} of {trials} automated browsing of {url}')
 
-
 def cred_spray():
+    #Grap credentials from specified file and use for padding
     with open('./data/accounts.txt', 'r') as f:
-        new_list = []
         for line in f:
             combo = line.strip('\r\n').split(':')
             username = combo[0]
@@ -120,8 +128,8 @@ def cred_spray():
                 'username': username,
                 'password': password,
             }
-            new_list.append(params)
-        return new_list
+            login(username, password)
+        return
 
 def menu():
     menu=True
@@ -141,15 +149,17 @@ def menu():
             print("\nLaunching Automated Surfing")
             main()
         elif menu=="2":
-            print("\n Launching Scrape Content")
-            main()
+            print("\n Launching Content Scraping")
+            print (f'Content is now being scrapped from {url}')
+            bot_broswing(url, trials)
         elif menu=="3":
             print("\n Credential Stuffing Attack")
-            login()
+            cred_spray()
         elif menu=="4" or "q":
             break
         elif menu == None:
             print("\n Not Valid Choice Try again")
 
 if __name__ == "__main__":
+    url, trials = main()
     menu()
