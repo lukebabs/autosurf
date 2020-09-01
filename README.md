@@ -21,6 +21,7 @@ The following are the required libraries for the program:
     10. soupsieve==2.0.1
     11. urllib3==1.25.10
     12. validators==0.18.0
+    13. lxml==4.5.2
 
 To automatically install packages, use the following:
     
