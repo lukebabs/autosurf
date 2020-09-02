@@ -1,13 +1,20 @@
+from re import VERBOSE
+from socket import MsgFlag
 import time
 import os
 import platform
+import sys, getopt
+from typing import ValuesView
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
-import sys, getopt
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 from bs4 import BeautifulSoup
 import validators
 import pandas as pd
+import random
+import json
 
 def main():
     url = ''
@@ -56,56 +63,67 @@ def select_browser():
         return
 
 def login(username, password):
-    driver = select_browser()
-    driver.get (url)
     try:
+        driver = select_browser() #Call function to set browser driver
+        driver.get (url) #URL is defined in universal variable from main()
         time.sleep(2)
+
+        #use credential dictionary file
         driver.find_element_by_name('username').send_keys(username)
         element = driver.find_element_by_name('password')
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
-        # driver.close()
-    except:
-        time.sleep(1) #slight delay to closely simulate a real browser
-        print("Tried {} as username and {} as password".format(username, password))
-        # driver.close()
-        return
+        time.sleep(1)
+        print(f'Successful Login: {driver.current_url}, {username}, {password}')
+
+    except Exception as v:
+        print (f'Failed Login: {v}, {username}, {password}')
 
 def scrape_data(url):
     driver = select_browser()
     driver.get(url)
     time.sleep(1)
 
-    
 # Find the first table on the page and start scraping - 
 # not too sophisticated but should be good enough for illustration
     '''Start the browser, input a search, and look for tables
     In this example, we are using AAPL as the input criteria'''
     try:
-        element = driver.find_element_by_name('ticker')
-        element.send_keys("AAPL")
+        element = driver.find_element_by_name('search')
+        element.send_keys("GOOG")
         element.send_keys(Keys.RETURN)
         time.sleep(2)
         soup = BeautifulSoup(driver.page_source, 'lxml')
-        driver.quit()
 
-    # Find table on the page and start scraping
-        tab_data = soup.select('table')[1]
+        if (soup.find_all('table')) == []: #If <table> tag is not found on page, then take screenshot
+            takescreenshot()
+            print ("No tables found to be scraped but we took screenshots")
+            driver.quit()
+        else:
+        # Find table on the page and start scraping
+            tab_data = soup.select('table')[1]
+            #Parse the data from the table to CSV using pandas library
+            n = 0
+            item = []
+            scraped_data = "./data/scraped.csv"
+            while n <= 5: #Scrape the first 5 rows (this is enough for illustration)
+                for items in tab_data.select('tr'):
+                    item = [elem.text for elem in items.select('th,td')]
+                    item.append
+                n += 1
+                print (item)
+                df = pd.DataFrame(item)
+                df.to_csv(scraped_data, index=False, header=False)
+    except NoSuchElementException as e:
+        takescreenshot(driver)
+        print (e, "**ALERT** 'Search' element could not be found. Check that the site is active")
 
-        #Parse the data from the table to CSV using pandas library
-        n = 0
-        item = []
-        scraped_data = "./data/scraped.csv"
-        while n <= 5: #Scrape the first 5 rows (this is enough for illustration)
-            for items in tab_data.select('tr'):
-                item = [elem.text for elem in items.select('th,td')]
-                item.append
-            n += 1
-            print (item)
-            df = pd.DataFrame(item)
-            df.to_csv(scraped_data, index=False, header=False)
-    except ValueError as e:
-        print (e, "**ALERT** wafautobot could not access the page. Check that the site is active")
+def takescreenshot(driver):
+    #Screenshots saved under ./data folder
+    randnum = random.randint(0,20)
+    screenshot_path = f'./data/screenshot{randnum}.png'
+    driver.save_screenshot(screenshot_path)
+    return
 
 
 def auto_surf(url, trials):
@@ -122,11 +140,8 @@ def cred_spray():
             combo = line.strip('\r\n').split(':')
             username = combo[0]
             password = combo[1]
-
-            # params = {
-            #     'username': username,
-            #     'password': password,
-            # }
+            '''use the credentials within the login function to 
+            brute force with the credentials'''
             login(username, password)
         return
 

@@ -1,5 +1,6 @@
-user001:password123
-admin:firstpass
-testaccount:pass54321
-impervaguy:dudehack
-lasttry:tryagain123
+user001@gmail.com:password123
+admin019192@gmail.com:firstpass
+testaccount@gmail.com:pass54321
+johndoe@bankerz.com:password123
+impervaguy@gmail.com:dudehack
+lasttry@gmail.com:tryagain123

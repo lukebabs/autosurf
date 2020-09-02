@@ -2,9 +2,10 @@
 Web Application Testing Tool - Python3
 
 This tool contains various testing options
-1. Bots
-2. Stress test - under development
-3. Automated browsers - ready to use
+1. Automated Humanlike Bots - #Ideal for SuperVeda Classic
+2. Perform Stress test - under development
+3. Auto scraping with browser - #Ideal for Acme Stock App
+4. Simulate Credential Stuffing Attack - #Ideal for 'Imperva Saving Bank Trust' app
 
 # Requirements
 The following are the required libraries for the program:
