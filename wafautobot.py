@@ -1,7 +1,4 @@
-from re import VERBOSE
-from socket import MsgFlag
 import time
-import os
 import platform
 import sys, getopt
 from typing import ValuesView
@@ -14,7 +11,6 @@ from bs4 import BeautifulSoup
 import validators
 import pandas as pd
 import random
-import json
 
 def main():
     url = ''
@@ -66,18 +62,18 @@ def login(username, password):
     try:
         driver = select_browser() #Call function to set browser driver
         driver.get (url) #URL is defined in universal variable from main()
-        time.sleep(2)
-
+        time.sleep(1)
         #use credential dictionary file
         driver.find_element_by_name('username').send_keys(username)
         element = driver.find_element_by_name('password')
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
         time.sleep(1)
-        print(f'Successful Login: {driver.current_url}, {username}, {password}')
+        print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
+        driver.quit()
 
     except Exception as v:
-        print (f'Failed Login: {v}, {username}, {password}')
+        print (f'Failed Login: {v}, {username}, {password}\n')
 
 def scrape_data(url):
     driver = select_browser()
