@@ -6,6 +6,7 @@ This tool contains various testing options
 2. Perform Stress test - under development
 3. Auto scraping with browser - #Ideal for Acme Stock App
 4. Simulate Credential Stuffing Attack - #Ideal for 'Imperva Saving Bank Trust' app
+5. Load Test - #This is basic generic python-requests. Still under development.
 
 # Requirements
 The following are the required libraries for the program:

@@ -167,7 +167,7 @@ def menu():
 
         menu=input("What would you like to do? ")
         if menu=="1":
-            print("\nLaunching Automated Surfing")
+            print("\n Basic Automated Load Test using Requests")
             load_test()
         elif menu=="2":
             print("\n Launching Content Scraping")
@@ -182,10 +182,12 @@ def menu():
             print("\n Not Valid Choice Try again")
 
 def load_test():
-    #Test code 
-    r = requests.get(url)
-    s = r.cookies
-    print (s)
+    #Test code
+    n = 0
+    while n < 200:
+        r = requests.get(url)
+        n += 1
+        print (r.status_code,"\n", r.cookies)
 
 if __name__ == "__main__":
     url, trials = main()
