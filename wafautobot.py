@@ -159,7 +159,7 @@ def menu():
         This tool is not intended to be used for nefarious activities.
         The solve purpose of its inception is to measure show the value of in-depth web application security
 
-        1. Automated Human-like Surfing - under construction
+        1. Basic Automated Load Test using Requests - (under construction)
         2. Scrape Content - scrapes tables
         3. Credential Stuffing Attack - under construction
         4. Exit/Quit
