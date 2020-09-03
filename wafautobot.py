@@ -1,11 +1,7 @@
-import time, platform, sys, getopt, validators, random, threading, requests, os
-from requests.models import Response
-from typing import ValuesView
+import time, platform, sys, getopt, validators, random, threading, requests, os, csv
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.remote.webelement import WebElement
 from bs4 import BeautifulSoup
 import pandas as pd
 
@@ -152,6 +148,23 @@ def cred_spray():
             login(username, password)
         return
 
+def load_test():
+    #Test code
+    n = 0
+    while n < 200:
+        proxy = pick_proxy()
+        time.sleep(2)
+        p = f"http://{proxy}"
+        r = requests.get(url,p)
+        n += 1
+        print (f"Response Code: {r.status_code},\n, Cookie: {r.cookies}, Using Proxy: {p}")
+
+def pick_proxy():
+    proxies = csv.reader(open('./data/proxies.csv', 'r'))
+    get_proxy = sum((proxy for proxy in proxies), [])
+    proxy = random.choice(get_proxy)
+    return (proxy)
+
 def menu():
     menu=True
     while menu:
@@ -182,14 +195,7 @@ def menu():
         elif menu == None:
             print("\n Not Valid Choice Try again")
 
-def load_test():
-    #Test code
-    n = 0
-    while n < 200:
-        r = requests.get(url)
-        n += 1
-        print (f"Response Code: {r.status_code},\n, Cookie: {r.cookies}")
-
 if __name__ == "__main__":
     url, trials = main()
     menu()
+    # pick_proxy()
