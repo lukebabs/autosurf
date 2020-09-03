@@ -12,7 +12,7 @@ def main():
     url = ''
     trials = ''
     try:
-        opts, args = getopt.getopt(sys.argv[1:],"u:t:")
+        opts, arg = getopt.getopt(sys.argv[1:],"u:t:")
         for opt, arg in opts:
             if opt == '-u':
                 url = str(arg)
@@ -51,13 +51,13 @@ def select_browser():
             else:
                 option = webdriver.ChromeOptions()
                 option.add_argument("-incognito")
-                browser = webdriver.Chrome(executable_path=f"{driver_path}", options=option)
+                browser = webdriver.Chrome(executable_path=f"{driver_path}")
                 return browser
         elif plt == 'Linux':
-            browser = webdriver.Chrome(executable_path="./drivers/chromedriver-2", options=option)
+            browser = webdriver.Chrome(executable_path="./drivers/chromedriver-2")
             return browser
         elif plt == 'Windows':
-            browser = webdriver.Chrome(executable_path=".\drivers\chromedriver.exe", options=option)
+            browser = webdriver.Chrome(executable_path=".\drivers\chromedriver.exe")
             return browser
     except:
         print ("Place driver for browser in /usr/local/bin. This can be downloaded from https://chromedriver.chromium.org/")
@@ -182,16 +182,10 @@ def menu():
             print("\n Not Valid Choice Try again")
 
 def load_test():
+    #Test code 
     r = requests.get(url)
     s = r.cookies
     print (s)
-
-
-def test_scrape_data(url):
-    browser_name = random.choice(os.listdir("./drivers/mac"))
-    browser_select = os.path.join("./drivers/mac/", browser_name)
-    print (browser_select)
-
 
 if __name__ == "__main__":
     url, trials = main()
