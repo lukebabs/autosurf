@@ -1,4 +1,5 @@
 import time, platform, sys, getopt, validators, random, threading, requests, os
+from requests.models import Response
 from typing import ValuesView
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
@@ -187,7 +188,7 @@ def load_test():
     while n < 200:
         r = requests.get(url)
         n += 1
-        print (r.status_code,"\n", r.cookies)
+        print (f"Response Code: {r.status_code},\n, Cookie: {r.cookies}")
 
 if __name__ == "__main__":
     url, trials = main()
