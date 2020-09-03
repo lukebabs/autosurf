@@ -1,4 +1,4 @@
-import time, platform, sys, getopt, validators, random, threading, requests
+import time, platform, sys, getopt, validators, random, threading, requests, os
 from typing import ValuesView
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
@@ -35,15 +35,24 @@ def bot_broswing(url, trials):
         print ('python wafautosurf.py -u <Host URL> -t <No of Trials>')
 
 def select_browser():
-    option = webdriver.ChromeOptions()
-    option.add_argument("-incognito")
     plt = platform.system()
+
     try:
         '''Drivers downloaded from https://chromedriver.chromium.org/
         and placed inside ./drivers/ or .\drivers\.'''
         if plt == 'Darwin':
-            browser = webdriver.Chrome(executable_path="./drivers/chromedriver", options=option)
-            return browser
+            #Adding diversification to MacOS to choose randomly between Chrome and Firefox
+            browser_name = random.choice(os.listdir("./drivers/mac"))
+            print (f"Using {browser_name} Driver")
+            driver_path = os.path.join("./drivers/mac/", browser_name)
+            if browser_name == "geckodriver":
+                browser = webdriver.Firefox(executable_path=f"{driver_path}")
+                return browser
+            else:
+                option = webdriver.ChromeOptions()
+                option.add_argument("-incognito")
+                browser = webdriver.Chrome(executable_path=f"{driver_path}", options=option)
+                return browser
         elif plt == 'Linux':
             browser = webdriver.Chrome(executable_path="./drivers/chromedriver-2", options=option)
             return browser
@@ -176,6 +185,13 @@ def load_test():
     r = requests.get(url)
     s = r.cookies
     print (s)
+
+
+def test_scrape_data(url):
+    browser_name = random.choice(os.listdir("./drivers/mac"))
+    browser_select = os.path.join("./drivers/mac/", browser_name)
+    print (browser_select)
+
 
 if __name__ == "__main__":
     url, trials = main()
