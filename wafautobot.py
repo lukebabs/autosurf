@@ -1,6 +1,4 @@
-import time
-import platform
-import sys, getopt
+import time, platform, sys, getopt, validators, random, threading, requests
 from typing import ValuesView
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
@@ -8,9 +6,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 from bs4 import BeautifulSoup
-import validators
 import pandas as pd
-import random
 
 def main():
     url = ''
@@ -33,7 +29,7 @@ def main():
 def bot_broswing(url, trials):
     #Start automated browsing after validating the url
     if validators.url(url) and trials > 0:
-        auto_surf(url, trials)
+        auto_surf(trials)
     else:
         print ("Check the input parameters for url and no. of trials")
         print ('python wafautosurf.py -u <Host URL> -t <No of Trials>')
@@ -75,7 +71,7 @@ def login(username, password):
     except Exception as v:
         print (f'Failed Login: {v}, {username}, {password}\n')
 
-def scrape_data(url):
+def scrape_data(url, ticker):
     driver = select_browser()
     driver.get(url)
     time.sleep(1)
@@ -85,14 +81,14 @@ def scrape_data(url):
     '''Start the browser, input a search, and look for tables
     In this example, we are using AAPL as the input criteria'''
     try:
+        print (ticker)
         element = driver.find_element_by_name('search')
-        element.send_keys("GOOG")
+        element.send_keys(ticker)
         element.send_keys(Keys.RETURN)
         time.sleep(2)
         soup = BeautifulSoup(driver.page_source, 'lxml')
-
         if (soup.find_all('table')) == []: #If <table> tag is not found on page, then take screenshot
-            takescreenshot()
+            takescreenshot(driver)
             print ("No tables found to be scraped but we took screenshots")
             driver.quit()
         else:
@@ -101,7 +97,7 @@ def scrape_data(url):
             #Parse the data from the table to CSV using pandas library
             n = 0
             item = []
-            scraped_data = "./data/scraped.csv"
+            file_path = "./data/scraped.csv"
             while n <= 5: #Scrape the first 5 rows (this is enough for illustration)
                 for items in tab_data.select('tr'):
                     item = [elem.text for elem in items.select('th,td')]
@@ -109,7 +105,8 @@ def scrape_data(url):
                 n += 1
                 print (item)
                 df = pd.DataFrame(item)
-                df.to_csv(scraped_data, index=False, header=False)
+                df.to_csv(file_path, index=False, header=False)
+
     except NoSuchElementException as e:
         takescreenshot(driver)
         print (e, "**ALERT** 'Search' element could not be found. Check that the site is active")
@@ -121,11 +118,15 @@ def takescreenshot(driver):
     driver.save_screenshot(screenshot_path)
     return
 
+def scrape():
+    search_list = ["GOOG", "AAPL", "TMUS", "T", "NKE"]
+    for ticker in search_list:
+        scrape_data(url, ticker)
 
-def auto_surf(url, trials):
+def auto_surf(trials):
     n = 1
     while n <= trials:
-        scrape_data(url)
+        scrape()
         n += 1
         print (f'Round {n-1} of {trials} automated browsing of {url}')
 
@@ -158,7 +159,7 @@ def menu():
         menu=input("What would you like to do? ")
         if menu=="1":
             print("\nLaunching Automated Surfing")
-            main()
+            load_test()
         elif menu=="2":
             print("\n Launching Content Scraping")
             print (f'Content is now being scrapped from {url}')
@@ -170,6 +171,11 @@ def menu():
             break
         elif menu == None:
             print("\n Not Valid Choice Try again")
+
+def load_test():
+    r = requests.get(url)
+    s = r.cookies
+    print (s)
 
 if __name__ == "__main__":
     url, trials = main()
