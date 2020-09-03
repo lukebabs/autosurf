@@ -1,0 +1,7 @@
+https://sitereport.netcraft.com/
+element = driver.find_element_by_class_name('contact-form__input--span')
+
+
+https://censys.io/ipv4
+classname: table--list
+    then -> table table-condensed table-striped
