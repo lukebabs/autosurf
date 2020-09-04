@@ -87,13 +87,12 @@ def login(username, password):
     try:
         driver = select_browser() #Call function to set browser driver
         driver.get (url) #URL is defined in universal variable from main()
-        time.sleep(1)
         #use credential dictionary file
         driver.find_element_by_name('username').send_keys(username)
         element = driver.find_element_by_name('password')
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
-        time.sleep(2)
+        time.sleep(1)
         print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
         driver.quit()
 
