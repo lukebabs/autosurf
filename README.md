@@ -54,13 +54,8 @@ To automatically install packages, use the following command:
             3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
             4. Exit/Quit
 
-
-# Setting up Selenium
-Download full program package which should include two directories - data and drivers.
-
-This package hasgit  been setup to provide chrome drivers for Windows, Linux and Mac and automatically select the right chrome driver based on the underlining operating system.
-
-To update the drivers, go to https://chromedriver.chromium.org/ and place the driver under in ./drivers folder for this program package. 
+# Permissions for Selenium
+Be aware that you may have to give Selenium drivers necessary trust permission during the first run. This applies to both Windows and MacOS.
 
 # Human Bot
 Added human bot to the toolset. This will be used to scape the site under chrome driver and with time delays to simulate slow surfing by human.
