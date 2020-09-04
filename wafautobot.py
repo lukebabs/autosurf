@@ -186,16 +186,10 @@ def load_test():
 
 
 def pick_proxy():
-    if pltOS == 'Windows':
-        proxies = csv.reader(open('.\data\proxies.csv', 'r'))
-        get_proxy = sum((proxy for proxy in proxies), [])
-        proxy = random.choice(get_proxy)
-        return (proxy)
-    else:
-        proxies = csv.reader(open('./data/proxies.csv', 'r'))
-        get_proxy = sum((proxy for proxy in proxies), [])
-        proxy = random.choice(get_proxy)
-        return (proxy)
+    proxies = csv.reader(open('./data/proxies.csv', 'r'))
+    get_proxy = sum((proxy for proxy in proxies), [])
+    proxy = random.choice(get_proxy)
+    return (proxy)
 
 
 def menu():
