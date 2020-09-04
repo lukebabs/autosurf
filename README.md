@@ -8,8 +8,10 @@ This tool contains various testing options
 4. Simulate Credential Stuffing Attack - #Ideal for 'Imperva Saving Bank Trust' app
 5. Load Test - #This is basic generic python-requests. Still under development.
 
-# Requirements
-The following are the required libraries for the program:
+# Requirements and Prerequisite
+This package was tested with Python 3.7.3 IDE
+
+**CRITICAL**The following are libraries are required to run the package:
 
     1. beautifulsoup4==4.9.1
     2. bs4==0.0.1
@@ -24,13 +26,18 @@ The following are the required libraries for the program:
     11. urllib3==1.25.10
     12. validators==0.18.0
     13. lxml==4.5.2
+    14. requests==2.24.0
 
-To automatically install packages, use the following:
+To automatically install packages, use the following command:
     
     pip3 install -r requirements.txt
 
+    OR
+
+    pip install -r requirements.txt
+
 # Initial usage
-    python3 wafautosurf.py -u https://www.google.com -t 1
+    python3 wafautosurf.py -u https://impervademo.com -t 1
 
     -u = Host URL
     -t = How many session iterations. Setting up a limit helps to control WAF testing in a functional way without turning the exercise into brite force.
@@ -43,9 +50,9 @@ To automatically install packages, use the following:
             This tool is not intended to be used for nefarious activities.
             The solve purpose of its inception is to measure show the value of in-depth web application security
 
-            1. Automated Human-like Surfing - under construction
+            1. Basic Automated Load Test using Requests - simple load test using 'python requests'
             2. Scrape Content - scrapes tables
-            3. Credential Stuffing Attack - under construction
+            3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
             4. Exit/Quit
 
 
