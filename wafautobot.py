@@ -31,8 +31,8 @@ def bot_broswing(url, trials):
         print ("Check the input parameters for url and no. of trials")
         print ('python wafautosurf.py -u <Host URL> -t <No of Trials>')
 
-def select_browser(pltOS):
-    # plt = platform.system()
+def select_browser():
+    pltOS = platform.system()
 
     try:
         '''Drivers downloaded from https://chromedriver.chromium.org/
@@ -223,7 +223,6 @@ def menu():
             print("\n Not Valid Choice Try again")
 
 if __name__ == "__main__":
-    pltOS = platform.system()
     url, trials = main()
     menu()
     # pick_proxy()
