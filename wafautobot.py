@@ -38,7 +38,16 @@ def select_browser():
         '''Drivers downloaded from https://chromedriver.chromium.org/
         and placed inside ./drivers/ or .\drivers\.'''
         if plt == 'Darwin':
-            #Adding diversification to MacOS to choose randomly between Chrome and Firefox
+            # #Adding diversification to MacOS to choose randomly between Chrome and Firefox
+            '''I was hopinh that something like the following would work for this:
+            #############
+            chrome = webdriver.Chrome(executable_path="./drivers/mac/chromedriver")
+            firefox = webdriver.Chrome(executable_path="./drivers/mac/geckodriver")
+            browser = random.choice(webdriver.Chrome(executable_path="./drivers/mac/chromedriver"), webdriver.Chrome(executable_path="./drivers/mac/geckodriver"))
+            return browser
+            #############
+            But Selenium is painful to work with'''
+
             browser_name = random.choice(os.listdir("./drivers/mac"))
             print (f"Using {browser_name} Driver")
             driver_path = os.path.join("./drivers/mac/", browser_name)
@@ -46,18 +55,32 @@ def select_browser():
                 browser = webdriver.Firefox(executable_path=f"{driver_path}")
                 return browser
             else:
-                option = webdriver.ChromeOptions()
-                option.add_argument("-incognito")
                 browser = webdriver.Chrome(executable_path=f"{driver_path}")
                 return browser
+
         elif plt == 'Linux':
-            browser = webdriver.Chrome(executable_path="./drivers/Linux/chromedriver-2")
-            return browser
+            browser_name = random.choice(os.listdir("./drivers/linux"))
+            print (f"Using {browser_name} Driver")
+            driver_path = os.path.join("./drivers/linux/", browser_name)
+            if browser_name == "geckodriver":
+                browser = webdriver.Firefox(executable_path=f"{driver_path}")
+                return browser
+            else:
+                browser = webdriver.Chrome(executable_path=f"{driver_path}")
+                return browser
+
         elif plt == 'Windows':
-            browser = webdriver.Chrome(executable_path=".\drivers\Windows\chromedriver.exe")
-            return browser
+            browser_name = random.choice(os.listdir(".\drivers\Windows"))
+            print (f"Using {browser_name} Driver")
+            driver_path = os.path.join(".\drivers\Windows", browser_name)
+            if browser_name == "geckodriver":
+                browser = webdriver.Firefox(executable_path=f"{driver_path}")
+                return browser
+            else:
+                browser = webdriver.Chrome(executable_path=f"{driver_path}")
+                return browser
     except:
-        print ("Place driver for browser in /usr/local/bin. This can be downloaded from https://chromedriver.chromium.org/")
+        print ("Place driver for browser in drivers directory. This can be downloaded from https://chromedriver.chromium.org/")
         return
 
 def login(username, password):
