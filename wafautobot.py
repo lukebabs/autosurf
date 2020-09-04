@@ -70,10 +70,10 @@ def select_browser():
                 return browser
 
         elif plt == 'Windows':
-            browser_name = random.choice(os.listdir(".\drivers\Windows"))
+            browser_name = random.choice(os.listdir(".\drivers\windows"))
             print (f"Using {browser_name} Driver")
             driver_path = os.path.join(".\drivers\Windows", browser_name)
-            if browser_name == "geckodriver":
+            if browser_name == "geckodriver.exe":
                 browser = webdriver.Firefox(executable_path=f"{driver_path}")
                 return browser
             else:
