@@ -140,6 +140,7 @@ def scrape_data(url, ticker):
         takescreenshot(driver)
         print (e, "**ALERT** 'Search' element could not be found. Check that the site is active")
 
+
 def takescreenshot(driver):
     #Screenshots saved under ./data folder
     randnum = random.randint(0,20)
@@ -147,10 +148,12 @@ def takescreenshot(driver):
     driver.save_screenshot(screenshot_path)
     return
 
+
 def scrape():
     search_list = ["GOOG", "AAPL", "TMUS", "T", "NKE"]
     for ticker in search_list:
         scrape_data(url, ticker)
+
 
 def auto_surf(trials):
     n = 1
@@ -158,6 +161,7 @@ def auto_surf(trials):
         scrape()
         n += 1
         print (f'Round {n-1} of {trials} automated browsing of {url}')
+
 
 def cred_spray():
     #Grap credentials from specified file and use for padding
@@ -182,11 +186,13 @@ def load_test():
         n += 1
         print (f"Response Code: {r.status_code},\n, Cookie: {r.cookies}, Using Proxy: {p}")
 
+
 def pick_proxy():
     proxies = csv.reader(open('./data/proxies.csv', 'r'))
     get_proxy = sum((proxy for proxy in proxies), [])
     proxy = random.choice(get_proxy)
     return (proxy)
+
 
 def menu():
     menu=True
