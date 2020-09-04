@@ -1,12 +1,11 @@
 # autosurf
 Web Application Testing Tool - Python3
 
-This tool contains various testing options
+This tool is ideal for various bot related use-cases:
 1. Automated Humanlike Bots - #Ideal for SuperVeda Classic
-2. Perform Stress test - under development
+2. Simulate Account Take Over, Credential Stuff, etc -  #Ideal for 'Imperva Saving Bank Trust' app
 3. Auto scraping with browser - #Ideal for Acme Stock App
-4. Simulate Credential Stuffing Attack - #Ideal for 'Imperva Saving Bank Trust' app
-5. Load Test - #This is basic generic python-requests. Still under development.
+4. Basic Load Test - #This is basic generic python-requests. Still under development to make it less obvious as a bot
 
 # Requirements and Prerequisite
 This package was tested with Python 3.7.3 IDE
@@ -59,7 +58,7 @@ To automatically install packages, use the following command:
 # Setting up Selenium
 Download full program package which should include two directories - data and drivers.
 
-This package has been setup to provide chrome drivers for Windows, Linux and Mac and automatically select the right chrome driver based on the underlining operating system.
+This package hasgit  been setup to provide chrome drivers for Windows, Linux and Mac and automatically select the right chrome driver based on the underlining operating system.
 
 To update the drivers, go to https://chromedriver.chromium.org/ and place the driver under in ./drivers folder for this program package. 
 
