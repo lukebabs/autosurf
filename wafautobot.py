@@ -51,10 +51,10 @@ def select_browser():
                 browser = webdriver.Chrome(executable_path=f"{driver_path}")
                 return browser
         elif plt == 'Linux':
-            browser = webdriver.Chrome(executable_path="./drivers/chromedriver-2")
+            browser = webdriver.Chrome(executable_path="./drivers/Linux/chromedriver-2")
             return browser
         elif plt == 'Windows':
-            browser = webdriver.Chrome(executable_path=".\drivers\chromedriver.exe")
+            browser = webdriver.Chrome(executable_path=".\drivers\Windows\chromedriver.exe")
             return browser
     except:
         print ("Place driver for browser in /usr/local/bin. This can be downloaded from https://chromedriver.chromium.org/")
