@@ -59,15 +59,15 @@ def select_browser():
                 return browser
 
         elif pltOS == 'Linux':
-            browser_name = random.choice(os.listdir("./drivers/linux"))
-            print (f"Using {browser_name} Driver")
-            driver_path = os.path.join("./drivers/linux/", browser_name)
-            if browser_name == "geckodriver":
-                browser = webdriver.Firefox(executable_path=f"{driver_path}")
-                return browser
-            else:
-                browser = webdriver.Chrome(executable_path=f"{driver_path}")
-                return browser
+            current_path = os.getcwd()
+            driver_file = "/chromedriver"
+            file_path = current_path+driver_file
+            option = webdriver.ChromeOptions()
+            option.add_argument('--no-sandbox')
+            option.add_argument('--disable-dev-shm-usage')
+            option.add_argument('--headless')
+            browser = webdriver.Chrome(executable_path=f"{file_path}",options=option)
+            return browser
 
         elif pltOS == 'Windows':
             browser_name = random.choice(os.listdir(".\drivers\windows"))
@@ -82,6 +82,7 @@ def select_browser():
     except:
         print ("Place driver for browser in drivers directory. This can be downloaded from https://chromedriver.chromium.org/")
         return
+
 
 def login(username, password):
     try:
@@ -178,7 +179,7 @@ def cred_spray():
 def load_test():
     #Test code
     n = 0
-    while n < 200:
+    while n < 20000:
         proxy = pick_proxy()
         p = f"http://{proxy}"
         r = requests.get(url,p)
@@ -225,5 +226,6 @@ def menu():
 
 if __name__ == "__main__":
     url, trials = main()
-    menu()
-    # pick_proxy()
+    driver = select_browser()
+    print (driver)
+    # menu()
