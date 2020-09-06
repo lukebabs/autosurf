@@ -61,7 +61,7 @@ def select_browser():
         elif pltOS == 'Linux':
             #This configuration allows linux server to natively run this program
             current_path = os.getcwd()
-            driver_file = "/driver/linux/chromedriver"
+            driver_file = "/drivers/linux/chromedriver"
             file_path = current_path+driver_file
             option = webdriver.ChromeOptions()
             option.add_argument('--no-sandbox')
