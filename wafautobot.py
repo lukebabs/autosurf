@@ -226,6 +226,4 @@ def menu():
 
 if __name__ == "__main__":
     url, trials = main()
-    driver = select_browser()
-    print (driver)
-    # menu()
+    menu()
