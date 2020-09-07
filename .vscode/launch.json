@@ -10,7 +10,8 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "pythonPath": "/Users/luke.babarinde/dev/bin/python3"
         }
     ]
 }

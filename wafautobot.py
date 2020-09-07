@@ -110,37 +110,26 @@ def scrape_data(url, ticker):
 # Find the first table on the page and start scraping - 
 # not too sophisticated but should be good enough for illustration
     '''Start the browser, input a search, and look for tables
-    In this example, we are using AAPL as the input criteria'''
+    In this example, we are using predefined list of tickers as the input criteria'''
     try:
         print (ticker)
         element = driver.find_element_by_name('search')
         element.send_keys(ticker)
         element.send_keys(Keys.RETURN)
-        time.sleep(1)
-        soup = BeautifulSoup(driver.page_source, 'lxml')
-        if (soup.find_all('table')) == []: #If <table> tag is not found on page, then take screenshot
-            takescreenshot(driver)
-            print ("No tables found to be scraped but we took screenshots")
-            driver.quit()
-        else:
-        # Find table on the page and start scraping
-            tab_data = soup.select('table')[1]
-            #Parse the data from the table to CSV using pandas library
-            n = 0
-            item = []
-            file_path = "./data/scraped.csv"
-            while n <= 5: #Scrape the first 5 rows (this is enough for illustration)
-                for items in tab_data.select('tr'):
-                    item = [elem.text for elem in items.select('th,td')]
-                    item.append
-                n += 1
-                print (item)
-                df = pd.DataFrame(item)
-                df.to_csv(file_path, index=False, header=False)
+        time.sleep(2)
+        df = pd.read_html(driver.page_source)[0]
+        df = (df.head(5))
+        print (df)
+
+        #The following saves the data to file - not necessary for illustration but nice to have
+        file_path = "./data/scraped.csv"
+        df = pd.DataFrame(df)
+        df.to_csv(file_path, index=False, header=False)
 
     except NoSuchElementException as e:
         takescreenshot(driver)
         print (e, "**ALERT** 'Search' element could not be found. Check that the site is active")
+        return breakpoint
 
 
 def takescreenshot(driver):
