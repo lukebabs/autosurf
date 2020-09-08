@@ -95,12 +95,13 @@ def login(username, password):
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
         time.sleep(1)
-        print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
+        # print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
+        print (f"Tried {username} and {password}\n")
         driver.quit()
 
     except Exception as v:
         time.sleep(1)
-        print (f'Failed Login: {v}, {username}, {password}\n')
+        print (f"Tried {username} and {password}\n")
 
 def scrape_data(url, ticker):
     driver = select_browser()
