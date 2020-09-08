@@ -8,7 +8,9 @@ This tool is ideal for various bot related use-cases:
 4. Basic Load Test - #This is basic generic python-requests. Still under development to make it less obvious as a bot
 
 # Requirements and Prerequisite
-This package was tested with Python 3.7.3 IDE
+1. Ensure Firefox and Chrome are installed on the test node
+2. This package requires Python3.x
+3. Install all the required libraries following the steps below:
 
 **CRITICAL**The following are libraries are required to run the package:
 
