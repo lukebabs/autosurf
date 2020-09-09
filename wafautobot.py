@@ -98,7 +98,7 @@ def login(username, password, login_url, username_pram, password_pram):
         element.send_keys(Keys.RETURN)
         time.sleep(2)
         # print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
-        print (f"Tried Username: {username} and Password: {password}\nRedirected to {driver.current_url}")
+        print (f"Tried Username: {username} and Password: {password}\nRedirected to {driver.current_url}\n")
         driver.quit()
 
     except Exception as v:
@@ -172,23 +172,30 @@ def cred_spray():
             login(username, password, login_url, username_pram, password_pram)
         return
 
-def load_test():
+def load_test(num_of_requests):
     #Test code
     n = 0
-    while n < 20000:
+    r = num_of_requests
+    while n < r:
         proxy = pick_proxy()
-        p = f"http://{proxy}"
-        r = requests.get(url,p)
+        p = "http://"+proxy
+        session = requests.Session()
+        session.proxies = p
+        request = session.get(url, verify = True)
         n += 1
-        print (f"Response Code: {r.status_code},\n, Cookie: {r.cookies}, Using Proxy: {p}")
+        print (f'No of requests: {n}')
+        # print (f"Response Code: {r.status_code},\n, Cookie: {r.cookies}, Using Proxy: {p}")
 
+def load_threading():
+    num_of_requests = int(input("Enter number of requests to send > "))
+    run = threading.Thread(target=load_test(num_of_requests), args=(1,))
+    run.start
 
 def pick_proxy():
     proxies = csv.reader(open('./data/proxies.csv', 'r'))
     get_proxy = sum((proxy for proxy in proxies), [])
     proxy = random.choice(get_proxy)
     return (proxy)
-
 
 def menu():
     menu=True
@@ -207,7 +214,7 @@ def menu():
         menu=input("What would you like to do? ")
         if menu=="1":
             print("\n Basic Automated Load Test using Requests")
-            load_test()
+            load_threading()
         elif menu=="2":
             print("\n Launching Content Scraping")
             print (f'Content is now being scrapped from {url}')
