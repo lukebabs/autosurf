@@ -158,9 +158,9 @@ def auto_surf(trials):
 
 
 def cred_spray():
-    login_url = str(input("Enter the login url: "))
-    username_pram = str(input("Enter the username parameter name: "))
-    password_pram = str(input("Enter the password parameter name: "))
+    login_url = str(input("Enter the login url e.g. /login.jsp.  > "))
+    username_pram = str(input("Enter the username parameter name > "))
+    password_pram = str(input("Enter the password parameter name > "))
     #Grap credentials from specified file and use for padding
     with open('./data/accounts.txt', 'r') as f:
         for line in f:
