@@ -55,6 +55,31 @@ To automatically install packages, use the following command:
             2. Scrape Content - scrapes tables
             3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
             4. Exit/Quit
+# Credential Stuff
+When using Option 3 for Credential Stuffing, you are required to provide URL, username parameter name and password parameter name.
+
+    MBP-174312-1:autosurf luke.babarinde$ python3 wafautobot.py -u https://impervademo.com -t 1
+
+            ** Caution: Still under development.
+            This tool is not intended to be used for nefarious activities.
+            The solve purpose of its inception is to measure show the value of in-depth web application security
+
+            1. Basic Automated Load Test using Requests - simple load test using 'python requests'
+            2. Scrape Content - scrapes tables
+            3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
+            4. Exit/Quit
+            
+    What would you like to do? 3
+
+    Credential Stuffing Attack
+    ==>Enter the login url: /isbt/login/
+    ==>Enter the username parameter name: username
+    ==>Enter the password parameter name: password
+    Using chromedriver Driver
+    Initial URL https://www.impervademo.com/isbt/login/
+    Tried user001@gmail.com and password123
+
+
 
 # Permissions for Selenium
 Be aware that you may have to give Selenium drivers necessary trust permission during the first run. This applies to both Windows and MacOS.
