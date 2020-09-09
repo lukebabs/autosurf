@@ -91,13 +91,14 @@ def login(username, password, login_url, username_pram, password_pram):
         driver = select_browser() #Call function to set browser driver
         driver.get (auth_url) #URL is defined in universal variable from main()
         #use credential dictionary file
+        print (f'Initial URL {driver.current_url}')
         driver.find_element_by_name(f'{username_pram}').send_keys(username)
         element = driver.find_element_by_name(f'{password_pram}')
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
-        time.sleep(1)
+        time.sleep(2)
         # print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
-        print (f"Tried {username} and {password}\n from {driver.current_url}")
+        print (f"Tried Username: {username} and Password: {password}\nRedirected to {driver.current_url}")
         driver.quit()
 
     except Exception as v:
