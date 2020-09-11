@@ -1,35 +1,36 @@
-import time, platform, sys, getopt, validators, random, threading, requests, os, csv
+import time, platform, sys, getopt, random, threading, os, csv
+import validators, requests
+import pandas as pd
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
-from bs4 import BeautifulSoup
-import pandas as pd
+
+__author__ = "Luke Babarinde"
+__credits__ = "Manny Liwanag"
+__license__ = "MIT"
+__version__ = "1.0.1"
+__email__ = "neofinder@gmail.com"
 
 def main():
     url = ''
     trials = ''
     try:
-        opts, arg = getopt.getopt(sys.argv[1:],"u:t:")
+        opts, arg = getopt.getopt(sys.argv[1:],"u:")
         for opt, arg in opts:
             if opt == '-u':
                 url = str(arg)
-            elif opt == '-t':
-                try:
-                    trials = int(arg)
-                except ValueError:
-                    print ("Enter a valid number for trials")
-                return url, trials  #returns these variables to be used as inputs in other functions
+                return url  #returns these variables to be used as inputs in other functions
     except getopt.GetoptError as e:
-        print (e, 'python wafautosurf.py -u <Host URL> -t <No of Trials>')
+        print (e, 'python wafautosurf.py -u <Host URL>')
         sys.exit(2)
 
-def bot_broswing(url, trials):
+def bot_broswing(url):
     #Start automated browsing after validating the url
-    if validators.url(url) and trials > 0:
-        auto_surf(trials)
+    if validators.url(url):
+        auto_surf()
     else:
-        print ("Check the input parameters for url and no. of trials")
-        print ('python wafautosurf.py -u <Host URL> -t <No of Trials>')
+        print ("Check the input parameters for url. Need to provide full url: http(s)://<fullURL>")
+        print ('python wafautosurf.py -u <Host URL>')
 
 def select_browser():
     pltOS = platform.system()
@@ -96,8 +97,7 @@ def login(username, password, login_url, username_pram, password_pram):
         element = driver.find_element_by_name(f'{password_pram}')
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
-        time.sleep(2)
-        # print(f'***SUCCESSFUL*** Login: {driver.current_url}, {username}, {password}\n')
+        time.sleep(4)
         print (f"Tried Username: {username} and Password: {password}\nRedirected to {driver.current_url}\n")
         driver.quit()
 
@@ -137,24 +137,25 @@ def scrape_data(url, ticker):
 
 def takescreenshot(driver):
     #Screenshots saved under ./data folder
-    randnum = random.randint(0,20)
+    randnum = random.randint(0,99)
     screenshot_path = f'./data/screenshot{randnum}.png'
     driver.save_screenshot(screenshot_path)
     return
 
 
 def scrape():
-    search_list = ["GOOG", "AAPL", "TMUS", "T", "NKE"]
+    search_list = ["GOOG", "AAPL", "TMUS", "T", "NKE"] #This list contains words to search
     for ticker in search_list:
         scrape_data(url, ticker)
 
 
-def auto_surf(trials):
+def auto_surf():
     n = 1
-    while n <= trials:
+    t = int(input("Enter number of requests to perform > "))
+    while n <= t:
         scrape()
         n += 1
-        print (f'Round {n-1} of {trials} automated browsing of {url}')
+        print (f'Round {n-1} of {t} automated browsing of {url}')
 
 
 def cred_spray():
@@ -183,8 +184,8 @@ def load_test(num_of_requests):
         session.proxies = p
         request = session.get(url, verify = True)
         n += 1
-        print (f'No of requests: {n}')
-        # print (f"Response Code: {r.status_code},\n, Cookie: {r.cookies}, Using Proxy: {p}")
+        print (f'No of requests: {n}', end ="\r")
+        sys.stdout.flush()
 
 def load_threading():
     num_of_requests = int(input("Enter number of requests to send > "))
@@ -218,7 +219,7 @@ def menu():
         elif menu=="2":
             print("\n Launching Content Scraping")
             print (f'Content is now being scrapped from {url}')
-            bot_broswing(url, trials)
+            bot_broswing(url)
         elif menu=="3":
             print("\n Credential Stuffing Attack")
             cred_spray()
@@ -228,5 +229,5 @@ def menu():
             print("\n Not Valid Choice Try again")
 
 if __name__ == "__main__":
-    url, trials = main()
+    url = main()
     menu()
