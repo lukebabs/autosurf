@@ -82,9 +82,11 @@ When using Option 4 for Credential Stuffing, you are required to provide URL, us
     Tried user001@gmail.com and password123
 
 
-
 # Permissions for Selenium
 Be aware that you may have to give Selenium drivers necessary trust permission for the first run. This applies to both Windows and MacOS. On Linux, simply install Chrome broswer
 
 # Human Bot
 Added human bot to the toolset. This can be used to automatically surf a site and click randomly as humans would. This can be good for reconnaissance.
+
+# Thanks
+Special thanks for Manny Liwanag for actively testing the script, ideas generation, and for the endless feedback loop to make this fit for purpose.
