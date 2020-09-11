@@ -202,11 +202,6 @@ def random_clicks():
     driver = select_browser()
     driver.get(url)
     time.sleep(2)
-    # links = driver.find_elements_by_partial_link_text('')
-    # l = links[random.randint(0, len(links)-1)]
-    # l.click()
-    # print(f'Clicked on link: {driver.current_url}')
-    # time.sleep(2)
     n = 0
     while n < 2: #This allows the bot to click random links 3 steps deep into the site
         try:
