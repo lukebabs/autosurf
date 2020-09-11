@@ -44,33 +44,34 @@ To automatically install packages, use the following command:
 
     Application menu:
     
-        MBP:autosurf$ python3 wafautobot.py -u http://www.zetty.me
+        MBP:luke.babarinde$ python3 wafautobot.py -u http://www.zetty.me
 
             ** Caution: Still under development.
             This tool is not intended to be used for nefarious activities.
             The solve purpose of its inception is to measure show the value of in-depth web application security
 
-            1. Basic Automated Load Test using Requests - simple load test using 'python requests'
-            2. Scrape Content - scrapes tables
-            3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
-            4. Exit/Quit
+            1. Simulate Human-like automated surfing
+            2. Basic Automated Load Test using Requests - simple load test using 'python requests'
+            3. Scrape Content - scrapes tables
+            4. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
+            5. Exit/Quit
 
 # Credential Stuff
-When using Option 3 for Credential Stuffing, you are required to provide URL, username parameter name and password parameter name.
+When using Option 4 for Credential Stuffing, you are required to provide URL, username parameter name and password parameter name. The credentials are stored in ./data/accounts.txt
 
-    MBP-174312-1:autosurf luke.babarinde$ python3 wafautobot.py -u https://impervademo.com
+        MBP:luke.babarinde$ python3 wafautobot.py -u https://impervademo.com
 
-        ** Caution: Still under development.
-        This tool is not intended to be used for nefarious activities.
-        The solve purpose of its inception is to measure show the value of in-depth web application security
+            ** Caution: Still under development.
+            This tool is not intended to be used for nefarious activities.
+            The solve purpose of its inception is to measure show the value of in-depth web application security
 
-        1. Simulate Human-like automated surfing
-        2. Basic Automated Load Test using Requests - simple load test using 'python requests'
-        3. Scrape Content - scrapes tables
-        4. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
-        5. Exit/Quit
+            1. Simulate Human-like automated surfing
+            2. Basic Automated Load Test using Requests - simple load test using 'python requests'
+            3. Scrape Content - scrapes tables
+            4. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
+            5. Exit/Quit
             
-    What would you like to do? 3
+    What would you like to do? 4
 
     Credential Stuffing Attack
     ==>Enter the login url: /isbt/login/
