@@ -13,13 +13,12 @@ __email__ = "neofinder@gmail.com"
 
 def main():
     url = ''
-    trials = ''
     try:
         opts, arg = getopt.getopt(sys.argv[1:],"u:")
         for opt, arg in opts:
             if opt == '-u':
                 url = str(arg)
-                return url  #returns these variables to be used as inputs in other functions
+                return url  #returns the variables to be used as inputs in other functions
     except getopt.GetoptError as e:
         print (e, 'python wafautosurf.py -u <Host URL>')
         sys.exit(2)
@@ -30,14 +29,14 @@ def bot_broswing(url):
         auto_surf()
     else:
         print ("Check the input parameters for url. Need to provide full url: http(s)://<fullURL>")
-        print ('python wafautosurf.py -u <Host URL>')
+        print ('python wafautosurf.py -u <http(s)://HostURL>')
 
 def select_browser():
     pltOS = platform.system()
 
     try:
         '''Drivers downloaded from https://chromedriver.chromium.org/
-        and placed inside ./drivers/ or .\drivers\.'''
+        and placed inside ./drivers folder'''
         if pltOS == 'Darwin':
             # #Adding diversification to MacOS to choose randomly between Chrome and Firefox
             '''I was hopinh that something like the following would work for this:
@@ -159,7 +158,7 @@ def auto_surf():
 
 
 def cred_spray():
-    login_url = str(input("Enter the login url e.g. /login.jsp.  > "))
+    login_url = str(input("Enter the login url e.g. /login.jsp  > "))
     username_pram = str(input("Enter the username parameter name > "))
     password_pram = str(input("Enter the password parameter name > "))
     #Grap credentials from specified file and use for padding
