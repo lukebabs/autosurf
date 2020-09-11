@@ -198,6 +198,37 @@ def pick_proxy():
     proxy = random.choice(get_proxy)
     return (proxy)
 
+def random_clicks():
+    driver = select_browser()
+    driver.get(url)
+    time.sleep(2)
+    # links = driver.find_elements_by_partial_link_text('')
+    # l = links[random.randint(0, len(links)-1)]
+    # l.click()
+    # print(f'Clicked on link: {driver.current_url}')
+    # time.sleep(2)
+    n = 0
+    while n < 2: #This allows the bot to click random links 3 steps deep into the site
+        try:
+            links = driver.find_elements_by_partial_link_text('')
+            l = links[random.randint(0, len(links)-1)]
+            l.click()
+            print(f'Clicked on link: {driver.current_url}')
+            time.sleep(2)
+            n += 1
+        except:
+            driver.quit()
+            return
+    driver.quit()
+
+def humanbot(url):
+    n = 0
+    t = int(input("Enter number of iterations to surf the site > "))
+    while n < t:
+        random_clicks()
+        n += 1
+
+
 def menu():
     menu=True
     while menu:
@@ -206,24 +237,28 @@ def menu():
         This tool is not intended to be used for nefarious activities.
         The solve purpose of its inception is to measure show the value of in-depth web application security
 
-        1. Basic Automated Load Test using Requests - simple load test using 'python requests'
-        2. Scrape Content - scrapes tables
-        3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
-        4. Exit/Quit
+        1. Simulate Human-like automated surfing
+        2. Basic Automated Load Test using Requests - simple load test using 'python requests'
+        3. Scrape Content - scrapes tables
+        4. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
+        5. Exit/Quit
         """)
 
         menu=input("What would you like to do? ")
         if menu=="1":
+            print("\n Simulate Human-like automated surfing")
+            humanbot(url)
+        elif menu=="2":
             print("\n Basic Automated Load Test using Requests")
             load_threading()
-        elif menu=="2":
+        elif menu=="3":
             print("\n Launching Content Scraping")
             print (f'Content is now being scrapped from {url}')
             bot_broswing(url)
-        elif menu=="3":
+        elif menu=="4":
             print("\n Credential Stuffing Attack")
             cred_spray()
-        elif menu=="4" or "q":
+        elif menu=="5" or "q":
             break
         elif menu == None:
             print("\n Not Valid Choice Try again")

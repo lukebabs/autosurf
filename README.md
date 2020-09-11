@@ -2,9 +2,9 @@
 Web Application Testing Tool - Python3
 
 This tool is ideal for various bot related use-cases:
-1. Automated Humanlike Bots - #Ideal for SuperVeda Classic
-2. Simulate Account Take Over, Credential Stuff, etc -  #Ideal for 'Imperva Saving Bank Trust' app
-3. Auto scraping with browser - #Ideal for Acme Stock App
+1. Automated Humanlike Bots - #This can be used for any website
+2. Auto scraping with browser - #Ideal for Acme Stock App
+3. Simulate Account Take Over, Credential Stuff, etc -  #Ideal for any site with login url
 4. Basic Load Test - #This is basic generic python-requests. Still under development to make it less obvious as a bot
 
 # Requirements and Prerequisite
@@ -38,14 +38,13 @@ To automatically install packages, use the following command:
     pip install -r requirements.txt
 
 # Initial usage
-    python3 wafautosurf.py -u https://impervademo.com -t 1
+    python3 wafautosurf.py -u https://impervademo.com
 
     -u = Host URL
-    -t = How many session iterations. Setting up a limit helps to control WAF testing in a functional way without turning the exercise into brite force.
 
     Application menu:
     
-        MBP:autosurf$ python3 wafautobot.py -u http://www.zetty.me -t 2
+        MBP:autosurf$ python3 wafautobot.py -u http://www.zetty.me
 
             ** Caution: Still under development.
             This tool is not intended to be used for nefarious activities.
@@ -55,19 +54,21 @@ To automatically install packages, use the following command:
             2. Scrape Content - scrapes tables
             3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
             4. Exit/Quit
+
 # Credential Stuff
 When using Option 3 for Credential Stuffing, you are required to provide URL, username parameter name and password parameter name.
 
-    MBP-174312-1:autosurf luke.babarinde$ python3 wafautobot.py -u https://impervademo.com -t 1
+    MBP-174312-1:autosurf luke.babarinde$ python3 wafautobot.py -u https://impervademo.com
 
-            ** Caution: Still under development.
-            This tool is not intended to be used for nefarious activities.
-            The solve purpose of its inception is to measure show the value of in-depth web application security
+        ** Caution: Still under development.
+        This tool is not intended to be used for nefarious activities.
+        The solve purpose of its inception is to measure show the value of in-depth web application security
 
-            1. Basic Automated Load Test using Requests - simple load test using 'python requests'
-            2. Scrape Content - scrapes tables
-            3. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
-            4. Exit/Quit
+        1. Simulate Human-like automated surfing
+        2. Basic Automated Load Test using Requests - simple load test using 'python requests'
+        3. Scrape Content - scrapes tables
+        4. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
+        5. Exit/Quit
             
     What would you like to do? 3
 
@@ -82,10 +83,7 @@ When using Option 3 for Credential Stuffing, you are required to provide URL, us
 
 
 # Permissions for Selenium
-Be aware that you may have to give Selenium drivers necessary trust permission during the first run. This applies to both Windows and MacOS.
+Be aware that you may have to give Selenium drivers necessary trust permission for the first run. This applies to both Windows and MacOS. On Linux, simply install Chrome broswer
 
 # Human Bot
-Added human bot to the toolset. This will be used to scape the site under chrome driver and with time delays to simulate slow surfing by human.
-
-    def humanbot()
-
+Added human bot to the toolset. This can be used to automatically surf a site and click randomly as humans would. This can be good for reconnaissance.
