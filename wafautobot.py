@@ -39,7 +39,7 @@ def select_browser():
         and placed inside ./drivers folder'''
         if pltOS == 'Darwin':
             # #Adding diversification to MacOS to choose randomly between Chrome and Firefox
-            '''I was hopinh that something like the following would work for this:
+            '''I was hoping that something like the following would work for this:
             #############
             chrome = webdriver.Chrome(executable_path="./drivers/mac/chromedriver")
             firefox = webdriver.Chrome(executable_path="./drivers/mac/geckodriver")
