@@ -32,22 +32,14 @@ def bot_broswing(url):
         print ('python wafautosurf.py -u <http(s)://HostURL>')
 
 def select_browser():
-    pltOS = platform.system()
+    pltOS = platform.system() #This helps identify the base OS - Darwin, Windows and Linux
 
     try:
         '''Drivers downloaded from https://chromedriver.chromium.org/
         and placed inside ./drivers folder'''
-        if pltOS == 'Darwin':
-            # #Adding diversification to MacOS to choose randomly between Chrome and Firefox
-            '''I was hoping that something like the following would work for this:
-            #############
-            chrome = webdriver.Chrome(executable_path="./drivers/mac/chromedriver")
-            firefox = webdriver.Chrome(executable_path="./drivers/mac/geckodriver")
-            browser = random.choice(webdriver.Chrome(executable_path="./drivers/mac/chromedriver"), webdriver.Chrome(executable_path="./drivers/mac/geckodriver"))
-            return browser
-            #############
-            But Selenium is painful to work with'''
 
+        # #Adding diversification of broswers based on OS to choose randomly between Chrome and Firefox
+        if pltOS == 'Darwin':
             browser_name = random.choice(os.listdir("./drivers/mac"))
             print (f"Using {browser_name} Driver")
             driver_path = os.path.join("./drivers/mac/", browser_name)
@@ -173,7 +165,6 @@ def cred_spray():
         return
 
 def load_test(num_of_requests):
-    #Test code
     n = 0
     r = num_of_requests
     while n < r:
