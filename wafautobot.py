@@ -1,4 +1,12 @@
-import time, platform, sys, getopt, random, threading, os, csv
+import time, platform, sys, getopt, random, os, csv, threading
+from multiprocessing import Process, Queue
+
+from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import Future 
+
+import concurrent.futures
+
 import validators, requests
 import pandas as pd
 from selenium import webdriver 
@@ -164,23 +172,28 @@ def cred_spray():
             login(username, password, login_url, username_pram, password_pram)
         return
 
-def load_test(num_of_requests):
-    n = 0
-    r = num_of_requests
-    while n < r:
-        proxy = pick_proxy()
-        p = "http://"+proxy
-        session = requests.Session()
-        session.proxies = p
-        request = session.get(url, verify = True)
-        n += 1
-        print (f'No of requests: {n}', end ="\r")
-        sys.stdout.flush()
+def load_test(i):
+    proxy = pick_proxy()
+    p = "http://"+proxy
+    session = requests.Session()
+    session.proxies = p
+    request = session.get(url, verify = True)
+    ppid = os.getppid()
+    pid = os.getpid()
+    print (f'Process ID: Parent {pid} and Child {ppid}. No of requests: {i}')
+    # sys.stdout.flush()
 
 def load_threading():
-    num_of_requests = int(input("Enter number of requests to send > "))
-    run = threading.Thread(target=load_test(num_of_requests), args=(1,))
-    run.start
+    r = int(input("Enter number of requests to send > "))
+    max_workers = int(input("Enter number of requests per second. Example -> 5 = 50rps, 10 = 100rps > "))
+#Achieve high speed of requests with 10 workers. Worker can be increased to acheve greater speed
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
+    start = time.time()
+    for i in range(r,0,-1):
+        f = executor.submit(load_test, i)
+    executor.shutdown()
+    end = time.time()
+    print (f'\nTime to execute is {end - start:.2f}s\n')
 
 def pick_proxy():
     proxies = csv.reader(open('./data/proxies.csv', 'r'))
@@ -250,4 +263,5 @@ def menu():
 
 if __name__ == "__main__":
     url = main()
+    thread_local = threading.local()
     menu()
