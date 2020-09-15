@@ -19,6 +19,7 @@ __license__ = "MIT"
 __version__ = "1.0.1"
 __email__ = "neofinder@gmail.com"
 
+
 def main():
     url = ''
     try:
@@ -175,13 +176,14 @@ def cred_spray():
 def load_test(i):
     proxy = pick_proxy()
     p = "http://"+proxy
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
     session = requests.Session()
     session.proxies = p
-    request = session.get(url, verify = True)
+    request = session.get(url, headers=headers, verify = True)
     ppid = os.getppid()
     pid = os.getpid()
-    print (f'Process ID: Parent {pid} and Child {ppid}. No of requests: {i}')
-    # sys.stdout.flush()
+    print (f'No of requests: {i}')
+    sys.stdout.flush()
 
 def load_threading():
     r = int(input("Enter number of requests to send > "))
