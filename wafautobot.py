@@ -1,12 +1,5 @@
-import time, platform, sys, getopt, random, os, csv, threading
-from multiprocessing import Process, Queue
-
-from concurrent.futures import ProcessPoolExecutor
-from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import Future 
-
+import time, platform, sys, getopt, random, os, csv
 import concurrent.futures
-
 import validators, requests
 import pandas as pd
 from selenium import webdriver 
@@ -265,5 +258,4 @@ def menu():
 
 if __name__ == "__main__":
     url = main()
-    thread_local = threading.local()
     menu()
