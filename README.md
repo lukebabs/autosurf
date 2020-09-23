@@ -63,7 +63,7 @@ When using Option 4 for Credential Stuffing, you are required to provide URL, us
 
             ** Caution: Still under development.
             This tool is not intended to be used for nefarious activities.
-            The solve purpose of its inception is to measure show the value of in-depth web application security
+            It is intended to demonstrate the value of advanced bot protection and WAF
 
             1. Simulate Human-like automated surfing
             2. Basic Automated Load Test using Requests - simple load test using 'python requests'
@@ -71,7 +71,7 @@ When using Option 4 for Credential Stuffing, you are required to provide URL, us
             4. Credential Stuffing Attack - #first configure dictionary in data/accounts.txt
             5. Exit/Quit
             
-    What would you like to do? 4
+        What would you like to do? 4
 
     Credential Stuffing Attack
     ==>Enter the login url: /isbt/login/
