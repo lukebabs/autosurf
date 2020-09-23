@@ -173,9 +173,7 @@ def load_test(i):
     session = requests.Session()
     session.proxies = p
     request = session.get(url, headers=headers, verify = True)
-    ppid = os.getppid()
-    pid = os.getpid()
-    print (f'No of requests: {i}')
+    print (f'No of requests: {i}', end = "\r")
     sys.stdout.flush()
 
 def load_threading():
@@ -184,7 +182,8 @@ def load_threading():
 #Achieve high speed of requests with 10 workers. Worker can be increased to acheve greater speed
     executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
     start = time.time()
-    for i in range(r,0,-1):
+    # for i in range(r,0,-1):
+    for i in range(0,r,1):
         f = executor.submit(load_test, i)
     executor.shutdown()
     end = time.time()
@@ -228,7 +227,7 @@ def menu():
         print("""
         ** Caution: Still under development.
         This tool is not intended to be used for nefarious activities.
-        The solve purpose of its inception is to measure show the value of in-depth web application security
+        It is intended to demonstrate the value of advanced bot protection and WAF
 
         1. Simulate Human-like automated surfing
         2. Basic Automated Load Test using Requests - simple load test using 'python requests'
