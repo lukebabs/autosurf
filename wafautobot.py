@@ -74,8 +74,8 @@ def select_browser():
             else:
                 browser = webdriver.Chrome(executable_path=f"{driver_path}")
                 return browser
-    except:
-        print ("Place driver for browser in drivers directory. This can be downloaded from https://chromedriver.chromium.org/")
+    except Exception as e:
+        print (f'{e}.\nDownload latest driver from https://chromedriver.chromium.org/, and place it in drivers directory.')
         return
 
 
@@ -96,6 +96,7 @@ def login(username, password, login_url, username_pram, password_pram):
 
     except Exception as v:
         time.sleep(1)
+        print (v)
         print (f"Tried {username} and {password}\n")
 
 def scrape_data(url, ticker):
@@ -144,7 +145,7 @@ def scrape():
 
 def auto_surf():
     n = 1
-    t = int(input("Enter number of requests to perform > "))
+    t = int(input("Enter number of iterations > "))
     while n <= t:
         scrape()
         n += 1
@@ -169,7 +170,7 @@ def cred_spray():
 def load_test(i):
     proxy = pick_proxy()
     p = "http://"+proxy
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'}
     session = requests.Session()
     session.proxies = p
     request = session.get(url, headers=headers, verify = True)
