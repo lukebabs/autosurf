@@ -88,5 +88,25 @@ Be aware that you may have to give Selenium drivers necessary trust permission f
 # Human Bot
 Added human bot to the toolset. This can be used to automatically surf a site and click randomly as humans would. This can be good for reconnaissance.
 
+# DB_DECEPTICON
+This was added to allow an engineer to generate simple queries against a database server.
+
+The two servers covered are:
+1. MSSQL
+2. Oracle
+
+* Connecting to MSSQL
+To connect the script from Windows, first install ODBC Driver for Windows: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver15
+
+On a Mac, use Brew to install the following:
+    brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+    brew update
+    brew install msodbcsql mssql-tools
+    brew install unixodbc
+
+* Connecting to Oracle
+Mac driver to Oracle is installed under: ./driver/mac/oracle
+Windows is installed under: ./driver/windows/oracle
+
 # Thanks
 Special thanks for Manny Liwanag for actively testing the script, ideas generation, and for the endless feedback loop to make this fit for purpose.
