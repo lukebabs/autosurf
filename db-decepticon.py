@@ -1,44 +1,59 @@
-import time, random
+import time, random, getpass, platform
 import cx_Oracle
 import pyodbc
-#Need cx_Oracle installed - https://cx-oracle.readthedocs.io/en/latest/user_guide/installation.html
-#Store in directory to be referenced below
-cx_Oracle.init_oracle_client(lib_dir="./drivers/mac/oracle/instantclient_19_3-2")
 
 def main():
     try:
-        n = int(input("Enter number of iterations > "))
+        thread_timer = int(input("Enter simulation time in seconds e.g. 600 = 6 monutes > "))
     except:
         print ('Value is not an integer')
         return
-    i = 0
-    while i < n:
+    
+    '''Using system timer to trick the process to only run for specified time'''
+    current_time = time.time()
+    elapsed_time = current_time+thread_timer #elapsed_time will be greater than or equal to current time to allow the processs to run at least once
+
+    while int(time.time()) <= elapsed_time:
         dump_tables()
-        i += 1
 
 def dbConnect_orcl():
-    connection = cx_Oracle.connect("superveda_db", "secure123", "192.168.0.204/orcl")
-    cursor = connection.cursor()
-    return cursor
+    pltOS = platform.system() #This helps identify the base OS - Darwin (Apple) or Windows
+    if pltOS == 'Darwin':
+        #Need cx_Oracle installed - https://cx-oracle.readthedocs.io/en/latest/user_guide/installation.html
+        #Store in directory to be referenced below
+        cx_Oracle.init_oracle_client(lib_dir="./drivers/mac/oracle/instantclient_19_3-2")
+
+    elif pltOS == 'Windows':
+        cx_Oracle.init_oracle_client(lib_dir="./drivers/windows/oracle/instantclient_19_3-2")
+    database = input("Enter DB instance e.g. '192.168.0.204/orcl' > ")
+    username = input("Enter username for DB e.g. 'superveda_db' > ")
+    password = getpass.getpass()
+    try:
+        connection = cx_Oracle.connect(username, password, database)
+        cursor = connection.cursor()
+        return cursor
+    except Exception as e:
+        print (e)
 
 def dbConnect_mssql():
-
     driver="{ODBC Driver 17 for SQL Server}"
-    server = "192.168.0.202"
-    database = "superveda_db"
-    username = "sa"
-    password = "secure123"
+    server = input("Enter MSSQL host name or IP address > ")
+    database = input("Enter database name e.g. 'superveda_db' >")
+    username = input("Enter DB username > ")
+    password = getpass.getpass()
     conn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+password)
     cursor = conn.cursor()
     return cursor
+
 
 def get_tables_mssql():
     cursor = dbConnect_mssql()
     cursor.execute('SELECT * FROM INFORMATION_SCHEMA.TABLES')
     tables = []
     for row in cursor:
-        tables.append(row[2])
+        tables.append(row[2]) #Extract only tables from response and append tables list
     return tables, cursor
+
 
 def get_tables_oracle():
     cursor = dbConnect_orcl()
@@ -49,8 +64,17 @@ def get_tables_oracle():
         tables.append(table_list)
     return tables, cursor
 
-def dump_tables():
-    tables, cursor = get_tables_mssql()
+
+def db_type(dbtype):
+    if dbtype == "oracle":
+        tables, cursor = get_tables_oracle()
+        return tables, cursor
+    elif dbtype == "mssql":
+        tables, cursor = get_tables_mssql()
+        return tables, cursor
+
+def dump_tables(dbtype):
+    tables, cursor = db_type(dbtype)
     random.shuffle(tables) #Shuffle the list so that the queries are random
     for items in tables:
         time.sleep(2)
@@ -62,7 +86,29 @@ def dump_tables():
         except Exception as v:
             print (v, items)
 
+def menu():
+    menu=True
+    while menu:
+        print("""
+        ** Caution: Under development.
+        DB Decepticon can be used to generate random queries to a database
+
+        1. Oracle
+        2. MSSQL
+        3. Exit
+        """)
+
+        menu=input("What would you like to do? ")
+        if menu=="1":
+            print("\n Oracle")
+            dump_tables("oracle")
+        elif menu=="2":
+            print("\n MSSQL")
+            dump_tables("mssql")
+        elif menu=="3" or "q":
+            break
+        elif menu == None:
+            print("\n Not Valid Choice Try again")
+
 if __name__ == "__main__":
     main()
-    # get_tables_mssql()
-    # dbConnect_mssql()
