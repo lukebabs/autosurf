@@ -95,7 +95,7 @@ The two servers covered are:
 1. MSSQL
 2. Oracle
 
-# Connecting to MSSQL
+* Connecting to MSSQL
 To connect the script from Windows, first install ODBC Driver for Windows: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver15
 
 On a Mac, use Brew to install the following:
@@ -104,7 +104,7 @@ On a Mac, use Brew to install the following:
     brew install msodbcsql mssql-tools
     brew install unixodbc
 
-# Connecting to Oracle
+* Connecting to Oracle
 1. For MacOS: Download Oracle driver from - https://download.oracle.com/otn_software/mac/instantclient/193000/instantclient-basiclite-macos.x64-19.3.0.0.0dbru.zip. Unpackage the file under: ./driver/mac/oracle (File is too large to be added to git)
 
 2. For Windows: Download the driver from: https://download.oracle.com/otn_software/nt/instantclient/19800/instantclient-basic-windows.x64-19.8.0.0.0dbru.zip. Unpackage the files under - ./driver/windows/oracle

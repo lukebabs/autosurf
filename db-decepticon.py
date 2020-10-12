@@ -28,11 +28,6 @@ def dbConnect_mssql():
     database = "superveda_db"
     username = "sa"
     password = "secure123"
-    # conn = pyodbc.connect("Driver={ODBC Driver 17 for SQL Server};"
-    #                     'Server=192.168.0.202;'
-    #                     'Database=superveda_db;'
-    #                     "uid=sa;pwd=secure123;")
-                
     conn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+password)
     cursor = conn.cursor()
     return cursor
