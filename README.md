@@ -105,7 +105,7 @@ On a Mac, use Brew to install the following:
     brew install unixodbc
 
 # Connecting to Oracle
-1. For MacOS: Download Oracle driver from - https://download.oracle.com/otn_software/mac/instantclient/193000/instantclient-basiclite-macos.x64-19.3.0.0.0dbru.zip. Unpackage the file under: ./driver/mac/oracle
+1. For MacOS: Download Oracle driver from - https://download.oracle.com/otn_software/mac/instantclient/193000/instantclient-basiclite-macos.x64-19.3.0.0.0dbru.zip. Unpackage the file under: ./driver/mac/oracle (File is too large to be added to git)
 
 2. For Windows: Download the driver from: https://download.oracle.com/otn_software/nt/instantclient/19800/instantclient-basic-windows.x64-19.8.0.0.0dbru.zip. Unpackage the files under - ./driver/windows/oracle
 
