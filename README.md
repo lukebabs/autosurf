@@ -1,5 +1,4 @@
-# autosurf
-Web Application Testing Tool - Python3
+# Web Application Testing Tool - Python3
 
 This tool is ideal for various bot related use-cases:
 1. Automated Humanlike Bots - #This can be used for any website
@@ -82,13 +81,13 @@ When using Option 4 for Credential Stuffing, you are required to provide URL, us
     Tried user001@gmail.com and password123
 
 
-# Permissions for Selenium
+* Permissions for Selenium
 Be aware that you may have to give Selenium drivers necessary trust permission for the first run. This applies to both Windows and MacOS. On Linux, simply install Chrome broswer
 
-# Human Bot
+* Human Bot
 Added human bot to the toolset. This can be used to automatically surf a site and click randomly as humans would. This can be good for reconnaissance.
 
-# DB_DECEPTICON
+# Added db_decepticon.py
 This was added to allow an engineer to generate simple queries against a database server.
 
 The two servers covered are:
