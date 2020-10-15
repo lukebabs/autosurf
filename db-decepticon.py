@@ -25,7 +25,7 @@ def main():
 
 def initate_timer():
     try:
-        thread_timer = int(input("Enter simulation time in seconds e.g. 600 = 6 monutes > "))
+        thread_timer = int(input("Enter simulation time in seconds e.g. 600 = 10 minutes > "))
     except:
         print ('Value is not an integer')
         return
@@ -167,5 +167,5 @@ if __name__ == "__main__":
         cx_Oracle.init_oracle_client(lib_dir="./drivers/mac/oracle/instantclient_19_3-2")
     elif pltOS == 'Windows':
         cx_Oracle.init_oracle_client(lib_dir="./drivers/windows/oracle/instantclient_19_3-2")
-        
+
     initate_timer()
