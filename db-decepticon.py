@@ -23,7 +23,7 @@ def main():
         print (e, 'python db_decepticon -t oracle')
         sys.exit(2)
 
-def timer():
+def initate_timer():
     try:
         thread_timer = int(input("Enter simulation time in seconds e.g. 600 = 6 monutes > "))
     except:
@@ -39,14 +39,17 @@ def timer():
 
 
 def dbConnect_mysql():
-    config = {
-        "host":server,
-        "user":username,
-        "password":password,
-        "database":database
-    }
-    cursor = connector.connect(**config)
-    return cursor
+    try:
+        config = {
+            "host":server,
+            "user":username,
+            "password":password,
+            "database":database
+        }
+        cursor = connector.connect(**config)
+        return cursor
+    except Exception as e:
+        print (e)
    
 def dbConnect_orcl():
     # cx_Oracle.init_oracle_client(lib_dir="./drivers/mac/oracle/instantclient_19_3-2")
@@ -58,9 +61,12 @@ def dbConnect_orcl():
         print (e)
 
 def dbConnect_mssql():
-    conn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+password)
-    cursor = conn.cursor()
-    return cursor
+    try:
+        conn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+password)
+        cursor = conn.cursor()
+        return cursor
+    except Exception as e:
+        print (e)
 
 
 def get_tables_mssql():
@@ -109,26 +115,26 @@ def get_tables():
 def dump_tables():
     tables, cursor = get_tables()
     random.shuffle(tables) #Shuffle the list so that the queries are random
-    for items in tables:
+    for table in tables:
         time.sleep(2)   #Introduce 2 second delay
-        print (f'\nResponse from {items} table:\n')
+        print (f'\nResponse from {table} table:\n')
 
         if dbtype == "mysql":       #This is required because mysql likes the connection to be explicitly reinitiated
             try:
                 cn = dbConnect_mysql()
                 cursor = cn.cursor()
-                cursor.execute(f"SELECT * FROM {items}")
+                cursor.execute(f"SELECT * FROM {table}")
                 for data in cursor:
                     print (data)
             except Exception as v:
-                print (v, items)
+                print (v, table)
         else:
             try:
-                cursor.execute(f"SELECT * FROM {items}")
+                cursor.execute(f"SELECT * FROM {table}")
                 for data in cursor:
                     print (data)
             except Exception as v:
-                print (v, items)
+                print (v, table)
 
 def get_credentials():
     database = "no-val-set"
@@ -161,5 +167,5 @@ if __name__ == "__main__":
         cx_Oracle.init_oracle_client(lib_dir="./drivers/mac/oracle/instantclient_19_3-2")
     elif pltOS == 'Windows':
         cx_Oracle.init_oracle_client(lib_dir="./drivers/windows/oracle/instantclient_19_3-2")
-    
-    timer()
+        
+    initate_timer()
