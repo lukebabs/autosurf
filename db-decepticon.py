@@ -1,5 +1,4 @@
 import time, random, getpass, platform, getopt, sys
-import pandas as pd
 import cx_Oracle
 import pyodbc
 import mysql.connector as connector
