@@ -87,12 +87,17 @@ Be aware that you may have to give Selenium drivers necessary trust permission f
 * Human Bot
 Added human bot to the toolset. This can be used to automatically surf a site and click randomly as humans would. This can be good for reconnaissance.
 
-# Added db_decepticon.py
-This was added to allow an engineer to generate simple queries against a database server.
+# Added db-decepticon.py
+Simple query simulation tool again database to update monitoring tools dashboards. User can specify how long queries should be generated in a continous loop.
 
-The two servers covered are:
+* Simulation workflow:
+1. Get tables from DB
+2. Run select queries again the tables randomly
+
+DB Types currently supported are:
 1. MSSQL
-2. Oracle
+2. MySQL
+3. Oracle - further testing required
 
 * Connecting to MSSQL
 To connect the script from Windows, first install ODBC Driver for Windows: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver15
@@ -107,6 +112,16 @@ On a Mac, use Brew to install the following:
 1. For MacOS: Download Oracle driver from - https://download.oracle.com/otn_software/mac/instantclient/193000/instantclient-basiclite-macos.x64-19.3.0.0.0dbru.zip. Unpackage the file under: ./driver/mac/oracle (File is too large to be added to git)
 
 2. For Windows: Download the driver from: https://download.oracle.com/otn_software/nt/instantclient/19800/instantclient-basic-windows.x64-19.8.0.0.0dbru.zip. Unpackage the files under - ./driver/windows/oracle
+
+Usage:
+        (dev) bash-3.2$ python db-decepticon.py -t mysql
+        Enter Server host name or IP address > 127.0.0.1
+        Enter Database name e.g. 'superveda_db' >classicmodels
+        Enter DB username > root
+        Password: 
+        Enter simulation time in seconds e.g. 600 = 6 monutes > 60
+python db-decepticon.py -t <dbtype>
+-t switch accepts DB Type
 
 # Thanks
 Special thanks for Manny Liwanag for actively testing the script, ideas generation, and for the endless feedback loop to make this fit for purpose.
