@@ -88,7 +88,7 @@ Be aware that you may have to give Selenium drivers necessary trust permission f
 Added human bot to the toolset. This can be used to automatically surf a site and click randomly as humans would. This can be good for reconnaissance.
 
 # Added db-decepticon.py
-Simple query simulation tool again database to update monitoring tools dashboards. User can specify how long queries should be generated in a continous loop.
+Simple DB query simulation tool. User can specify how long queries should be generated in a continous loop.
 
 * Simulation workflow:
 1. Get tables from DB
