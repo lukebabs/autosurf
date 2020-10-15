@@ -88,7 +88,7 @@ Be aware that you may have to give Selenium drivers necessary trust permission f
 Added human bot to the toolset. This can be used to automatically surf a site and click randomly as humans would. This can be good for reconnaissance.
 
 # Added db-decepticon.py
-Simple DB query simulation tool. User can specify how long queries should be generated in a continous loop.
+Simple DB query simulation tool. User can specify how long queries should be generated in a continuous loop until time elapses.
 
 * Simulation workflow:
 1. Get tables from DB
@@ -119,7 +119,7 @@ Usage:
         Enter Database name e.g. 'superveda_db' >classicmodels
         Enter DB username > root
         Password: 
-        Enter simulation time in seconds e.g. 600 = 6 monutes > 60
+        Enter simulation time in seconds e.g. 600 = 10 minutes > 120
 python db-decepticon.py -t <dbtype>
 -t switch accepts DB Type
 
