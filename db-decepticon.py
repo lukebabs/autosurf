@@ -58,7 +58,6 @@ def dbConnect_orcl():
         print (e)
 
 def dbConnect_mssql():
-    print (driver, server, database, username, password)
     conn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+password)
     cursor = conn.cursor()
     return cursor
