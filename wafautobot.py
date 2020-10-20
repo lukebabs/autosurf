@@ -100,9 +100,12 @@ def login(username, password, login_url, username_pram, password_pram):
         print (f"Tried {username} and {password}\n")
 
 def scrape_data(url, ticker):
-    driver = select_browser()
-    driver.get(url)
-    time.sleep(1)
+    try:
+        driver = select_browser()
+        driver.get(url)
+        time.sleep(1)
+    except:
+        return
 
 # Find the first table on the page and start scraping - 
 # not too sophisticated but should be good enough for illustration
@@ -123,7 +126,7 @@ def scrape_data(url, ticker):
         df = pd.DataFrame(df)
         df.to_csv(file_path, index=False, header=False)
 
-    except NoSuchElementException as e:
+    except (NoSuchElementException, ValueError) as e:
         takescreenshot(driver)
         print (e, "**ALERT** 'Search' element could not be found. Check that the site is active")
         return breakpoint
