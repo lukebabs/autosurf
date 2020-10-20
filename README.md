@@ -125,3 +125,24 @@ python db-decepticon.py -t <dbtype>
 
 # Thanks
 Special thanks for Manny Liwanag for actively testing the script, ideas generation, and for the endless feedback loop to make this fit for purpose.
+
+# ERROR LOG:
+
+If you receive the following error:
+
+        Using chromedriver Driver
+        Message: session not created: This version of ChromeDriver only supports Chrome version 84.
+        Download latest driver from https://chromedriver.chromium.org/, and place it in drivers directory.
+        Traceback (most recent call last):
+        File "wafautobot.py", line 261, in <module>
+            menu()
+        File "wafautobot.py", line 243, in menu
+            humanbot(url)
+        File "wafautobot.py", line 221, in humanbot
+            random_clicks()
+        File "wafautobot.py", line 201, in random_clicks
+            driver.get(url)
+        AttributeError: 'NoneType' object has no attribute 'get'
+ 
+* Solution:
+The solution is to download the latest driver from https://chromedriver.chromium.org and replace the existing one the /driver folder.
