@@ -42,15 +42,22 @@ def select_browser():
 
         # #Adding diversification of broswers based on OS to choose randomly between Chrome and Firefox
         if pltOS == 'Darwin':
-            browser_name = random.choice(os.listdir("./drivers/mac"))
-            print (f"Using {browser_name} Driver")
-            driver_path = os.path.join("./drivers/mac/", browser_name)
-            if browser_name == "geckodriver":
-                browser = webdriver.Firefox(executable_path=f"{driver_path}")
-                return browser
-            else:
-                browser = webdriver.Chrome(executable_path=f"{driver_path}")
-                return browser
+            # driver_path = os.path.join("./drivers/mac/", browser_name)
+
+            driver_path= "./drivers/mac/geckodriver"
+            browser = webdriver.Firefox(executable_path=f"{driver_path}")
+            return browser
+            # browser_name = random.choice(os.listdir("./drivers/mac"))
+            # print (f"Using {browser_name} Driver")
+            # driver_path = os.path.join("./drivers/mac/", browser_name)
+            # browser = webdriver.Firefox(executable_path=f"{driver_path}")
+            # return browser
+            # if browser_name == "geckodriver":
+            #     browser = webdriver.Firefox(executable_path=f"{driver_path}")
+            #     return browser
+            # else:
+            #     browser = webdriver.Chrome(executable_path=f"{driver_path}")
+            #     return browser
 
         elif pltOS == 'Linux':
             #This configuration allows linux server to natively run this program

@@ -11,6 +11,15 @@ class Database(): #This class is not yet active. It will be used when multiple u
         self.username = username
         self.password = password
 
+
+def credentials():
+    with open('./data/db/accounts.txt', 'r') as f:
+        for line in f:
+            combo = line.strip('\r\n').split(':')
+            username = combo[0]
+            password = combo[1]
+            return username, password
+
 def main():
     dbtype = ''
     try:
