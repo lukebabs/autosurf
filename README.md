@@ -37,7 +37,7 @@ To automatically install packages, use the following command:
     pip install -r requirements.txt
 
 # Initial usage
-    python3 wafautosurf.py -u https://impervademo.com
+    python3 wafautobot.py -u https://impervademo.com
 
     -u = Host URL
 
