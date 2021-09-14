@@ -4,6 +4,7 @@ import random
 from stem import Signal
 from stem.control import Controller
 
+# https://github.com/tamimibrahim17/List-of-user-agents
 user_agent_list = [
 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36',
 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36',
