@@ -3,6 +3,7 @@ from pprint import pprint
 from zapv2 import ZAPv2
 
 se_lab = ['superveda.impervademo.com', 'superveda-protected.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
+
 i = 0
 while i < 5:
     for site in se_lab:
@@ -52,5 +53,5 @@ while i < 5:
         print ('Hosts: {}'.format(', '.join(zap.core.hosts)))
         print ('Alerts: ')
         pprint (zap.core.alerts())
-        time.sleep(1800)
+        time.sleep(600)
     i +=1
