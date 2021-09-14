@@ -52,5 +52,5 @@ while i < 5:
         print ('Hosts: {}'.format(', '.join(zap.core.hosts)))
         print ('Alerts: ')
         pprint (zap.core.alerts())
-        time.sleep(5000)
-        i +=1
+        time.sleep(1800)
+    i +=1
