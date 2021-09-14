@@ -5,7 +5,7 @@ from zapv2 import ZAPv2
 se_lab = ['superveda.impervademo.com', 'superveda-protected.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
 
 i = 0
-while i < 5:
+while i < 100:
     for site in se_lab:
         target = str("http://"+site)
         print (target)
