@@ -84,7 +84,10 @@ def switch_ip():
 
 
 if __name__ == "__main__":
-    for site in se_lab:
-        #website = str(input("Enter the website > "))
-        website = site
-        use_requests()
+    while True:
+
+        for site in se_lab:
+            print (site)
+            #website = str(input("Enter the website > "))
+            #website = site
+            #use_requests()
