@@ -4,16 +4,13 @@ import threading
 import requests
 import time, re
 import random
-from selenium import webdriver 
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.options import Options
-from selenium.common.exceptions import NoSuchElementException
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 
+#List all sites to run requests against
+se_lab = ['superveda.impervademo.com', 'superveda-protected.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com', 'http://isbt-protected.impervademo.com']
 
-se_lab = ['superveda.impervademo.com', 'superveda-protected.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
 #This function serves to get user_agents from text file and transform it to a list
 def tranform_user_agent_list():
     file_list = open('./data/user-agents.txt').readlines()
@@ -63,15 +60,15 @@ def switch_ip():
 def start_requests(se_lab, i):
     while i < 50:
         for site in se_lab:
-            print (site)
+            print ("Starting request for " +site)
             use_requests(site)
         i +=1
 
 def load_threading():
-    r1 = threading.Thread(target=start_requests, args=(se_lab, 0))
-    r2 = threading.Thread(target=start_requests, args=(se_lab, 0))
-    r3 = threading.Thread(target=start_requests, args=(se_lab, 0))
-    r4 = threading.Thread(target=start_requests, args=(se_lab, 0))
+    r1 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
+    r2 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
+    r3 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
+    r4 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
     try:
         r1.start()
         r2.start()
@@ -82,4 +79,3 @@ def load_threading():
 
 if __name__ == "__main__":
     load_threading()
-
