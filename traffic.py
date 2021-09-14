@@ -60,8 +60,8 @@ def switch_ip():
         controller.close()
 def start_requests(se_lab, i):
     while i < 50:
-        print ("Starting request for " +site)
-        use_requests(site)
+        print ("Starting request for " +se_lab)
+        use_requests(se_lab)
         i +=1
 
 def load_threading():
