@@ -68,7 +68,7 @@ def use_selenium():
         switch_ip()
 
 def use_requests():
-    for i in range(100):
+    for i in range(500):
         result = get_request()
         print ("\n Session Cookie is " + str(result))
         switch_ip()
@@ -84,5 +84,7 @@ def switch_ip():
 
 
 if __name__ == "__main__":
-    website = str(input("Enter the website > "))
-    use_requests()
+    for site in se_lab:
+        #website = str(input("Enter the website > "))
+        website = site
+        use_requests()
