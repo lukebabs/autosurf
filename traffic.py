@@ -9,6 +9,8 @@ from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 
+
+se_lab = [wwsonar.impervademo.com, superveda.impervademo.com, superveda-protected.impervademo.com, acme.impervademo.com, isbt.impervademo.com]
 #This function serves to get user_agents from text file and transform it to a list
 def tranform_user_agent_list():
     file_list = open('./data/user-agents.txt').readlines()
