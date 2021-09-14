@@ -1,3 +1,6 @@
+from concurrent.futures import thread
+import _thread
+import threading
 import requests
 import time, re
 import random
@@ -25,7 +28,7 @@ def pick_user_agent():
     return (user_agent)
 
 
-def get_request():
+def get_request(site):
     session = requests.session()
 
     # TO Request URL with SOCKS over TOR
@@ -37,16 +40,16 @@ def get_request():
     try:
         user_agent = pick_user_agent()
         headers = {'User-Agent':user_agent}
-        url = "http://"+website
+        url = "http://"+site
         r = session.get(url, headers=headers)
     except Exception as e:
         print (str(e))
     else:
         return session.cookies
 
-def use_requests():
+def use_requests(site):
     for i in range(500):
-        result = get_request()
+        result = get_request(site)
         print ("\n Session Cookie is " + str(result))
         switch_ip()
         time.sleep(5)
@@ -57,12 +60,26 @@ def switch_ip():
         controller.authenticate(password="hdfwgufbowhrh234fbhdg")
         controller.signal(Signal.NEWNYM)
         controller.close()
-
-if __name__ == "__main__":
-    i = 0
+def start_requests(se_lab, i):
     while i < 50:
         for site in se_lab:
             print (site)
-            website = site
-            use_requests()
+            use_requests(site)
         i +=1
+
+def load_threading():
+    r1 = threading.Thread(target=start_requests, args=(se_lab, 0))
+    r2 = threading.Thread(target=start_requests, args=(se_lab, 0))
+    r3 = threading.Thread(target=start_requests, args=(se_lab, 0))
+    r4 = threading.Thread(target=start_requests, args=(se_lab, 0))
+    try:
+        r1.start()
+        r2.start()
+        r3.start()
+        r4.start()
+    except Exception as e:
+        print (e)
+
+if __name__ == "__main__":
+    load_threading()
+
