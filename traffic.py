@@ -44,29 +44,6 @@ def get_request():
     else:
         return session.cookies
 
-# get a new selenium webdriver with tor as the proxy
-def my_proxy(TOR_IP, TOR_PORT):
-    fp = webdriver.FirefoxProfile()
-    # Direct = 0, Manual = 1, PAC = 2, AUTODETECT = 4, SYSTEM = 5
-    fp.set_preference("network.proxy.type", 1)
-    fp.set_preference("network.proxy.socks",TOR_IP)
-    fp.set_preference("network.proxy.socks_port",int(TOR_PORT))
-    fp.update_preferences()
-    options = Options()
-    options.headless = True
-    return webdriver.Firefox(options=options, firefox_profile=fp)
-
-def use_selenium():
-    for i in range(1):
-        proxy = my_proxy("127.0.0.1", 9050)
-        proxy.get("https://whatismyip.com/")
-        html = proxy.page_source
-        soup = BeautifulSoup(html, 'lxml')
-        print(soup.find("span", {"id": "ipv4"}))
-        print(soup.find("span", {"id": "ipv6"}))
-        proxy.quit()
-        switch_ip()
-
 def use_requests():
     for i in range(500):
         result = get_request()
@@ -81,13 +58,11 @@ def switch_ip():
         controller.signal(Signal.NEWNYM)
         controller.close()
 
-
-
 if __name__ == "__main__":
-    while True:
-
+    i = 0
+    while i < 50:
         for site in se_lab:
             print (site)
-            #website = str(input("Enter the website > "))
-            #website = site
-            #use_requests()
+            website = site
+            use_requests()
+        i +=1
