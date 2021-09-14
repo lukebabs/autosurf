@@ -1,5 +1,5 @@
 import requests
-import time
+import time, csv
 import random
 from stem import Signal
 from stem.control import Controller
@@ -13,7 +13,14 @@ user_agent_list = [
 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 EdgiOS/46.3.13 Mobile/15E148 Safari/605.1.15'
 ]
 
-website = str(input("Enter the website > "))
+def pick_user_agent():
+    user_agents_list = open('./data/user-agents.txt').readlines()
+    user_agent = random.choice(user_agents_list)
+    return (user_agent)
+
+
+# website = str(input("Enter the website > "))
+website = "www.futureauto.co"
 
 # This function simply opens up connection to Tor, selects random user-agent 
 # and access the site.
@@ -21,11 +28,11 @@ def surf():
     session = requests.session()
     # TO Request URL with SOCKS over TOR
     session.proxies = {}
-    session.proxies['http']='socks5h://localhost:9050'
-    session.proxies['https']='socks5h://localhost:9050'
+    session.proxies['http']='socks5h://10.147.18.180:9050'
+    session.proxies['https']='socks5h://10.147.18.180:9050'
     
     try:
-        user_agent = random.choice(user_agent_list)
+        user_agent = pick_user_agent()
         headers = {'User-Agent':user_agent}
         url = "http://"+website
         r = session.get(url, headers=headers)
@@ -51,7 +58,8 @@ def my_proxy(PROXY_HOST,PROXY_PORT):
 # This function renews IP TOR exit 
 def renew_tor_ip():
     with Controller.from_port(port = 9051) as controller:
-        controller.authenticate(password="hdfwgufbowhrh234fbhdg")
+        # controller.authenticate(password="hdfwgufbowhrh234fbhdg")
+        controller.authenticate()
         controller.signal(Signal.NEWNYM)
         controller.close()
 
@@ -74,8 +82,10 @@ def random_clicks():
     driver.quit()
 
 if __name__ == "__main__":
-    for i in range(100):
-        surf()
-        print(i+" requests")
-        renew_tor_ip()
-        time.sleep(5)
+    print(pick_user_agent())
+
+    # for i in range(100):
+    #     surf()
+    #     print(i)
+    #     renew_tor_ip()
+    #     time.sleep(5)
