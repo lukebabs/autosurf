@@ -2,7 +2,7 @@ import time
 from pprint import pprint
 from zapv2 import ZAPv2
 
-se_lab = ['superveda.impervademo.com', 'superveda-protected.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
+se_lab = ['superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
 
 i = 0
 while i < 100:
