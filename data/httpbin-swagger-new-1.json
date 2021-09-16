@@ -1,0 +1,413 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "",
+    "title": "httpbin",
+    "description": "http request and response services"
+  },
+  "host":"www.tyk-test.com:8080",
+  "basePath":"/httpbin",
+  "paths": {
+    "/user-agent": {
+      "get": {
+        "operationId": "GET_user-agent",
+        "summary": "http://www.httpbin.org/user-agent",
+        "description": "returns user agent",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/xml": {
+      "get": {
+        "operationId": "GET_xml",
+        "summary": "http://www.httpbin.org/xml",
+        "description": "returns some xml",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/image/jpeg": {
+      "get": {
+        "operationId": "GET_image-jpeg",
+        "summary": "http://www.httpbin.org/image/jpeg",
+        "description": "returns a jpeg image",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/html": {
+      "get": {
+        "operationId": "GET_html",
+        "summary": "http://www.httpbin.org/html",
+        "description": "Renders an html page",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/robots.txt": {
+      "get": {
+        "operationId": "GET_robots-txt",
+        "summary": "http://www.httpbin.org/robots.txt",
+        "description": "Returns some robots.txt rules",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/image/png": {
+      "get": {
+        "operationId": "GET_image-png",
+        "summary": "http://www.httpbin.org/image/png",
+        "description": "returns a png image",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/gzip": {
+      "get": {
+        "operationId": "GET_gzip",
+        "summary": "http://www.httpbin.org/gzip",
+        "description": "returns gzip-encoded data",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/encoding/utf8": {
+      "get": {
+        "operationId": "GET_encoding-utf8",
+        "summary": "http://www.httpbin.org/encoding/utf8",
+        "description": "returns page containing utf-8 data",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/etag/etag": {
+      "get": {
+        "operationId": "GET_etag-etag",
+        "summary": "http://www.httpbin.org/etag/etag",
+        "description": "Assumes the resource has the given etag and responds to If-None-Match header with a 200 or 304 and If-Match with a 200 or 412 as appropriate.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/deny": {
+      "get": {
+        "operationId": "GET_deny",
+        "summary": "http://www.httpbin.org/deny",
+        "description": "Denied by robots.txt file",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/links/10": {
+      "get": {
+        "operationId": "GET_links-10",
+        "summary": "http://www.httpbin.org/links/10",
+        "description": "Returns page containing n HTML links.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/cookies/": {
+      "get": {
+        "operationId": "GET_cookies",
+        "summary": "http://www.httpbin.org/cookies/set?k2=v2",
+        "description": "sets one or more simple cookies",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/delay/3": {
+      "get": {
+        "operationId": "GET_delay-3",
+        "summary": "http://www.httpbin.org/delay/3",
+        "description": "delays responding for min(n,10) seconds",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/cache": {
+      "get": {
+        "operationId": "GET_cache",
+        "summary": "http://www.httpbin.org/cache",
+        "description": "Returns 200 unless an If-Modified-Since or If-None-Match header is provided, when it returns a 304",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/deflate": {
+      "get": {
+        "operationId": "GET_deflate",
+        "summary": "http://www.httpbin.org/deflate",
+        "description": "returns deflate-encoded data",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/get": {
+      "get": {
+        "operationId": "GET_get",
+        "summary": "/get",
+        "description": "302 redirects n times",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/image/svg": {
+      "get": {
+        "operationId": "GET_image-svg",
+        "summary": "http://www.httpbin.org/image/svg",
+        "description": "returns a svg image",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/image/webp": {
+      "get": {
+        "operationId": "GET_image-webp",
+        "summary": "http://www.httpbin.org/image/webp",
+        "description": "returns a webp image",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/brotli": {
+      "get": {
+        "operationId": "GET_brotli",
+        "summary": "http://www.httpbin.org/brotli",
+        "description": "returns brotli-encoded data",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/forms/post": {
+      "get": {
+        "operationId": "GET_forms-post",
+        "summary": "http://www.httpbin.org/forms/post",
+        "description": "HTML form that submits to /post",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/status/418": {
+      "get": {
+        "operationId": "GET_status-418",
+        "summary": "http://www.httpbin.org/status/418",
+        "description": "returns given http status code",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/ip": {
+      "get": {
+        "operationId": "GET_ip",
+        "summary": "/ip",
+        "description": "This page",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/response-headers": {
+      "get": {
+        "operationId": "GET_response-headers",
+        "summary": "http://www.httpbin.org/response-headers?Content-Type=text%2Fplain%3B+charset%3DUTF-8&Server=httpbin",
+        "description": "returns given response header",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "text/plain;+charset=UTF-8"
+          },
+          {
+            "name": "Server",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "httpbin"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/cache/60": {
+      "get": {
+        "operationId": "GET_cache-60",
+        "summary": "http://www.httpbin.org/cache/60",
+        "description": "sets a cache control headers in n seconds",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}
