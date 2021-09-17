@@ -6,8 +6,8 @@ from stem.control import Controller
 
 
 def main():
-    se_lab = ['api.impervademo.com','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
-    #se_lab = ['api.topplayers.pro']
+    se_lab = ['api.impervademo.com','api.topplayers.pro','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
+    # se_lab = ['api.impervademo.com','api.topplayers.pro']
     i = 0
     while i < 100:
         for site in se_lab:
