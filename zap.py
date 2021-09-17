@@ -10,7 +10,8 @@ def switch_ip():
         controller.signal(Signal.NEWNYM)
         controller.close()
 
-se_lab = ['api.topplayers.pro','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
+se_lab = ['api.impervademo.com','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
+#se_lab = ['api.topplayers.pro']
 
 i = 0
 while i < 100:
