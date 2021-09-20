@@ -8,7 +8,7 @@ def main():
     se_lab = ['api.impervademo.com','api.topplayers.pro','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
     # se_lab = ['api.impervademo.com','api.topplayers.pro']
     i = 0
-    while i < 100:
+    while i < 1000:
         for site in se_lab:
             target = str("http://"+site)
             print (target)
@@ -70,4 +70,5 @@ def switch_ip():
         controller.close()
 
 if __name__ == "__main__":
+    switch_ip()
     main()
