@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import time
 from pprint import pprint
 from zapv2 import ZAPv2
