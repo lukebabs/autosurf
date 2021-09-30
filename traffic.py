@@ -1,5 +1,3 @@
-from concurrent.futures import thread
-import _thread
 import threading
 import requests
 import time, re
@@ -58,11 +56,10 @@ def switch_ip():
         controller.authenticate(password="hdfwgufbowhrh234fbhdg")
         controller.signal(Signal.NEWNYM)
         controller.close()
+
 def start_requests(se_lab, i):
-    while i < 50:
-        print ("Starting request for " +se_lab)
-        use_requests(se_lab)
-        i +=1
+    print ("Starting request for " +se_lab)
+    use_requests(se_lab)
 
 def load_threading():
     r1 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
@@ -78,5 +75,5 @@ def load_threading():
         print (e)
 
 if __name__ == "__main__":
-    load_threading()
-    # print (random.choice(se_lab))
+    while True:
+        load_threading()
