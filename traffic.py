@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 #List all sites to run requests against
 
-se_lab = ['superveda.impervademo.com', 'superveda-protected.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com', 'isbt-protected.impervademo.com']
+se_lab = ['superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
 
 #This function serves to get user_agents from text file and transform it to a list
 def tranform_user_agent_list():
@@ -44,7 +44,7 @@ def get_request(site):
         return session.cookies
 
 def use_requests(site):
-    for i in range(500):
+    for i in range(5):
         result = get_request(site)
         print ("\n Session Cookie is " + str(result))
         switch_ip()
@@ -64,13 +64,13 @@ def start_requests(se_lab, i):
 def load_threading():
     r1 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
     r2 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
-    r3 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
-    r4 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
+#   r3 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
+#    r4 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
     try:
         r1.start()
         r2.start()
-        r3.start()
-        r4.start()
+#        r3.start()
+#        r4.start()
     except Exception as e:
         print (e)
 
