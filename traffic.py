@@ -8,7 +8,12 @@ from bs4 import BeautifulSoup
 
 #List all sites to run requests against
 
-se_lab = ['superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
+def site_list():
+    file_list = open('./data/sites.txt').readlines() #Grabs list of sites defined in file
+    sites = []
+    for i in file_list:
+        sites.append(re.sub('\n', '', i)) #removes newline when adding to list
+    return sites
 
 #This function serves to get user_agents from text file and transform it to a list
 def tranform_user_agent_list():
@@ -22,7 +27,6 @@ def pick_user_agent():
     user_agent_list = tranform_user_agent_list()
     user_agent = random.choice(user_agent_list)
     return (user_agent)
-
 
 def get_request(site):
     session = requests.session()
@@ -61,19 +65,20 @@ def start_requests(se_lab, i):
     print ("Starting request for " +se_lab)
     use_requests(se_lab)
 
-def load_threading():
-    r1 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
-    r2 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
-#   r3 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
-#    r4 = threading.Thread(target=start_requests, args=(random.choice(se_lab), 0))
+def load_threading(sites):
+    r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     try:
         r1.start()
         r2.start()
-#        r3.start()
-#        r4.start()
+        r3.start()
+        r4.start()
     except Exception as e:
         print (e)
 
 if __name__ == "__main__":
+    sites = site_list()
     while True:
-        load_threading()
+        load_threading(sites)
