@@ -1,13 +1,16 @@
 import threading
 import requests
-import time, re
+import time, re, os
 import random
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+load_dotenv()
 
-#List all sites to run requests against
+TOR_KEY = os.getenv('TOR')
 
+#Create list of  sites to run requests against from ./data/sites.txt
 def site_list():
     file_list = open('./data/sites.txt').readlines() #Grabs list of sites defined in file
     sites = []
@@ -47,24 +50,28 @@ def get_request(site):
     else:
         return session.cookies
 
-def use_requests(site):
+def use_requests(sites):
     for i in range(5):
-        result = get_request(site)
+        result = get_request(sites)
         print ("\n Session Cookie is " + str(result))
         switch_ip()
         time.sleep(5)
+    return
 
 #This is the controller responsible for rotating exit IP Address
 def switch_ip():
     with Controller.from_port(port = 9051) as controller:
-        controller.authenticate(password="hdfwgufbowhrh234fbhdg")
+        controller.authenticate(password=TOR_KEY) 
         controller.signal(Signal.NEWNYM)
         controller.close()
+    return
 
 def start_requests(se_lab, i):
     print ("Starting request for " +se_lab)
-    use_requests(se_lab)
+    use_requests(sites)
+    return
 
+#Creating multiple threads to scale the events generated
 def load_threading(sites):
     r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
@@ -77,8 +84,10 @@ def load_threading(sites):
         r4.start()
     except Exception as e:
         print (e)
+    return
 
 if __name__ == "__main__":
     sites = site_list()
     while True:
         load_threading(sites)
+        TOR=hdfwgufbowhrh234fbhdg
