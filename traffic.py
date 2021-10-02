@@ -67,8 +67,8 @@ def switch_ip():
         controller.close()
     return
 
-def start_requests(se_lab, i):
-    print ("Starting request for " +se_lab)
+def start_requests(sites, i):
+    print ("Starting request for " +sites)
     use_requests(sites)
     return
 
