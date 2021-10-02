@@ -70,7 +70,7 @@ def start_requests(sites):
 
 #Creating multiple threads to scale the events generated
 def load_threading(sites):
-    r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    r1 = threading.Thread(target=start_requests, args=(random.choice(sites)))
     # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
