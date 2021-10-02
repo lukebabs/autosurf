@@ -13,11 +13,8 @@ TOR_KEY = os.getenv('TOR')
 
 #Create list of  sites to run requests against from ./data/sites.txt
 def site_list():
-    file = open('./data/sites.txt').readlines() #Grabs list of sites defined in file
-    sites = []
-    for i in file:
-        sites.append(re.sub('\n', '', i)) #removes newline when adding to list
-    file.close()
+    with open('./data/sites.txt') as f:
+        sites = [site.strip() for site in f]
     return sites
 
 #This function serves to get user_agents from text file and transform it to a list
