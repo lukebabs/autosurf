@@ -63,14 +63,14 @@ def switch_ip():
         controller.close()
     return
 
-def start_requests(sites):
+def start_requests(sites, i):
     print ("Starting request for " +sites)
     use_requests(sites)
     return
 
 #Creating multiple threads to scale the events generated
 def load_threading(sites):
-    r1 = threading.Thread(target=start_requests, args=(random.choice(sites)))
+    r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
