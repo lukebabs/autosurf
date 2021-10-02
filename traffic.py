@@ -13,17 +13,15 @@ TOR_KEY = os.getenv('TOR')
 
 #Create list of  sites to run requests against from ./data/sites.txt
 def site_list():
-    with open('./data/sites.txt') as f:
-        sites = [site.strip() for site in f]
+    with open('./data/sites.txt') as file:
+        sites = [site.strip() for site in file]
     return sites
 
 #This function serves to get user_agents from text file and transform it to a list
 def tranform_user_agent_list():
-    file_list = open('./data/user-agents.txt').readlines()
-    new_list = []
-    for i in file_list:
-        new_list.append(re.sub('\n', '', i)) #replacing the newline during extraction
-    return new_list #new list of user_agents in list format
+    with open('./data/user-agents.txt') as file:
+        user_agents = [user_agent.strip() for user_agent in file]  #lambda replacing the newline during extraction
+    return user_agents #new list of user_agents in list format
 
 def pick_user_agent():
     user_agent_list = tranform_user_agent_list()
