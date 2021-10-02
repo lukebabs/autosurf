@@ -68,8 +68,8 @@ def start_requests(site):
     return
 
 #Creating multiple threads to scale the events generated
-def load_threading(site, user_agent):
-    r1 = threading.Thread(target=start_requests, args=(site, 0))
+def load_threading():
+    r1 = threading.Thread(target=start_requests(site))
     # r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
@@ -90,5 +90,6 @@ if __name__ == "__main__":
         site = random.choice(sites)
         user_agent = random.choice(user_agents)
         print (site + user_agent)
-        time.sleep(3)
-       # load_threading(site, user_agent)
+        #time.sleep(3)
+        load_threading()
+        time.sleep(2)
