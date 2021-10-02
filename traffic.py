@@ -76,14 +76,14 @@ def start_requests(sites, i):
 #Creating multiple threads to scale the events generated
 def load_threading(sites):
     r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    # r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    # r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     try:
         r1.start()
-        r2.start()
-        r3.start()
-        r4.start()
+        # r2.start()
+        # r3.start()
+        # r4.start()
     except Exception as e:
         print (e)
     return
