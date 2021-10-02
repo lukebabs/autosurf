@@ -18,15 +18,14 @@ def site_list():
     return sites
 
 #This function serves to get user_agents from text file and transform it to a list
-def tranform_user_agent_list():
+def user_agents_list():
     with open('./data/user-agents.txt') as file:
         user_agents = [user_agent.strip() for user_agent in file]  #lambda replacing the newline during extraction
     return user_agents #new list of user_agents in list format
 
-def pick_user_agent():
-    user_agent_list = tranform_user_agent_list()
-    user_agent = random.choice(user_agent_list)
-    return (user_agent)
+# def pick_user_agent():
+#     user_agent = random.choice(get_user_agents)
+#     return user_agent
 
 def get_request(site):
     session = requests.session()
@@ -38,7 +37,7 @@ def get_request(site):
     
     #website = str(input("Enter the website > "))
     try:
-        user_agent = pick_user_agent()
+        # user_agent = pick_user_agent()
         headers = {'User-Agent':user_agent}
         url = "http://"+site
         r = session.get(url, headers=headers)
@@ -47,9 +46,9 @@ def get_request(site):
     else:
         return session.cookies
 
-def use_requests(sites):
+def use_requests(site):
     for i in range(5):
-        result = get_request(sites)
+        result = get_request(site)
         print ("\n Session Cookie is " + str(result))
         switch_ip()
         time.sleep(5)
@@ -63,14 +62,15 @@ def switch_ip():
         controller.close()
     return
 
-def start_requests(sites, i):
-    print ("Starting request for " +sites)
-    use_requests(sites)
+def start_requests(site, i):
+    print ("Starting request for " +site)
+    use_requests(site)
     return
 
 #Creating multiple threads to scale the events generated
-def load_threading(sites):
-    r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+def load_threading(site):
+    r1 = threading.Thread(target=start_requests, args=site)
+    # r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
@@ -85,5 +85,8 @@ def load_threading(sites):
 
 if __name__ == "__main__":
     sites = site_list()
+    user_agents = user_agents_list()
     while True:
-        load_threading(sites)
+        site = random.choice(sites)
+        user_agent = random.choice(user_agents)
+        load_threading(site, user_agent)
