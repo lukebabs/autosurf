@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import threading
 import requests
 import time, re, os
