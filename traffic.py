@@ -27,7 +27,7 @@ def user_agents_list():
 #     user_agent = random.choice(get_user_agents)
 #     return user_agent
 
-def get_request(site):
+def get_request():
     session = requests.session()
 
     # TO Request URL with SOCKS over TOR
@@ -68,7 +68,7 @@ def start_requests(site, i):
     return
 
 #Creating multiple threads to scale the events generated
-def load_threading(site):
+def load_threading():
     r1 = threading.Thread(target=start_requests, args=site)
     # r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
     # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
@@ -89,4 +89,4 @@ if __name__ == "__main__":
     while True:
         site = random.choice(sites)
         user_agent = random.choice(user_agents)
-        load_threading(site, user_agent)
+        load_threading()
