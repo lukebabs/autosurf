@@ -90,4 +90,3 @@ if __name__ == "__main__":
     sites = site_list()
     while True:
         load_threading(sites)
-        TOR=hdfwgufbowhrh234fbhdg
