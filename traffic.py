@@ -19,16 +19,16 @@ def site_list():
         sites = [site.strip() for site in file] #function to turn the txt file content into list
     return sites
 
-#This function serves to get user_agents from text file and transform it to a list
-def tranform_user_agent_list():
+#Get user_agents from text file and transform it to a list
+def get_user_agents():
     with open('./data/user-agents.txt') as file:
         user_agents = [site.strip() for site in file] #function to turn the txt file content into list
     return user_agents #new list of user_agents in list format
 
 def pick_user_agent():
-    user_agent_list = tranform_user_agent_list()
+    user_agent_list = get_user_agents()
     user_agent = random.choice(user_agent_list)
-    return (user_agent)
+    return user_agent
 
 
 def get_request(site):
@@ -63,12 +63,6 @@ def switch_ip():
         controller.authenticate(password=TOR_KEY) # Password is defined in .env file as TOR_KEY
         controller.signal(Signal.NEWNYM)
         controller.close()
-
-    # file_list = open('./data/user-agents.txt').readlines()
-    # new_list = []
-    # for i in file_list:
-    #     new_list.append(re.sub('\n', '', i)) #replacing the newline during extraction
-    # return new_list #new list of user_agents in list format
 
 def start_requests(sites, i):
     print ("Starting request for " +sites)
