@@ -63,17 +63,32 @@ def start_requests(sites, i):
 
 def load_threading():
     #Setting up for threads to enhance request output
-    r1 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
-    r2 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
-    r3 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
-    r4 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
-    try:
-        r1.start()
-        r2.start()
-        r3.start()
-        r4.start()
-    except Exception as e:
-        print (e)
+    threads = list()
+    for i in range(3):
+        r = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+        threads.append(r)
+        try:
+            r.start()
+        except Exception as e:
+            print (e)
+
+        
+
+
+
+
+        
+    # r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    # r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    # r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    # try:
+    #     r1.start()
+    #     r2.start()
+    #     r3.start()
+    #     r4.start()
+    # except Exception as e:
+    #     print (e)
 
 if __name__ == "__main__":
     sites = site_list() #Get site list from text file - ./data/sites.txt
