@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 load_dotenv()
 
-TOR_KEY = os.getenv('TOR')
+TOR_KEY = os.getenv('TOR') #Grab key from .env file
 
 #List all sites to run requests against
 def site_list():
@@ -63,10 +63,10 @@ def start_requests(sites, i):
 
 def load_threading():
     #Setting up for threads to enhance request output
-    r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
+    r1 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
+    r2 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
+    r3 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
+    r4 = threading.Thread(target=start_requests, args=(random.choice(sites),0))
     try:
         r1.start()
         r2.start()
