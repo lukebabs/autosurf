@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 from concurrent.futures import thread
-import _thread
 import threading
 import requests
 import time, os
@@ -25,12 +24,6 @@ def get_user_agents():
         user_agents = [site.strip() for site in file] #function to turn the txt file content into list
     return user_agents #new list of user_agents in list format
 
-def pick_user_agent():
-    user_agent_list = get_user_agents()
-    user_agent = random.choice(user_agent_list)
-    return user_agent
-
-
 def get_request(site):
     session = requests.session()
 
@@ -41,7 +34,7 @@ def get_request(site):
 
     #website = str(input("Enter the website > "))
     try:
-        user_agent = pick_user_agent()
+        user_agent = random.choice(user_agent_list)
         headers = {'User-Agent':user_agent}
         url = "http://"+site
         r = session.get(url, headers=headers)
@@ -83,7 +76,8 @@ def load_threading():
         print (e)
 
 if __name__ == "__main__":
-    sites = site_list()
+    sites = site_list() #Get site list from text file - ./data/sites.txt
+    user_agent_list = get_user_agents() #Get user-agents from text - ./data/user-agent.txt
     while True: #Infinite loop to allow the code to run as a service
         load_threading()
         time.sleep(5)

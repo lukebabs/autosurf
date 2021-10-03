@@ -81,6 +81,11 @@ target/
 profile_default/
 ipython_config.py
 
+#  test files
+simulator.py
+traffic-deprecated.py
+requirements-old.txt
+
 # pyenv
 .python-version
 
