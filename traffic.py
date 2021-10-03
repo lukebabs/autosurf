@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 load_dotenv()
 
-TOR_KEY = os.getenv('TOR')
+TOR_KEY = os.getenv('TOR') #Grab key from .env file
 
 #List all sites to run requests against
 def site_list():
