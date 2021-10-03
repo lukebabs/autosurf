@@ -72,24 +72,6 @@ def load_threading():
         except Exception as e:
             print (e)
 
-        
-
-
-
-
-        
-    # r1 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    # r2 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    # r3 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    # r4 = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
-    # try:
-    #     r1.start()
-    #     r2.start()
-    #     r3.start()
-    #     r4.start()
-    # except Exception as e:
-    #     print (e)
-
 if __name__ == "__main__":
     sites = site_list() #Get site list from text file - ./data/sites.txt
     user_agent_list = get_user_agents() #Get user-agents from text - ./data/user-agent.txt
