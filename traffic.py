@@ -64,6 +64,12 @@ def switch_ip():
         controller.signal(Signal.NEWNYM)
         controller.close()
 
+    # file_list = open('./data/user-agents.txt').readlines()
+    # new_list = []
+    # for i in file_list:
+    #     new_list.append(re.sub('\n', '', i)) #replacing the newline during extraction
+    # return new_list #new list of user_agents in list format
+
 def start_requests(sites, i):
     print ("Starting request for " +sites)
     use_requests(sites)
