@@ -12,18 +12,21 @@ from bs4 import BeautifulSoup
 #List all sites to run requests against
 def site_list():
     with open('./data/sites.txt') as file:
-        sites = [site.strip() for site in file]
+        sites = [site.strip() for site in file] #function to turn the txt file content into list
     return sites
-
-# sites = ['superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
 
 #This function serves to get user_agents from text file and transform it to a list
 def tranform_user_agent_list():
-    file_list = open('./data/user-agents.txt').readlines()
-    new_list = []
-    for i in file_list:
-        new_list.append(re.sub('\n', '', i)) #replacing the newline during extraction
-    return new_list #new list of user_agents in list format
+    with open('./data/user-agents.txt') as file:
+        user_agents = [site.strip() for site in file] #function to turn the txt file content into list
+    return user_agents #new list of user_agents in list format
+
+
+    # file_list = open('./data/user-agents.txt').readlines()
+    # new_list = []
+    # for i in file_list:
+    #     new_list.append(re.sub('\n', '', i)) #replacing the newline during extraction
+    # return new_list #new list of user_agents in list format
 
 def pick_user_agent():
     user_agent_list = tranform_user_agent_list()
@@ -64,13 +67,6 @@ def switch_ip():
         controller.authenticate(password="hdfwgufbowhrh234fbhdg")
         controller.signal(Signal.NEWNYM)
         controller.close()
-
-#def start_requests(sites, i):
-#    i == 0
-#    while i < 50:
-#        print ("Starting request for " +sites)
-#        use_requests(sites)
-#        i =+ 1
 
 def start_requests(sites, i):
     print ("Starting request for " +sites)
