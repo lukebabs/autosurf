@@ -6,8 +6,8 @@ import random
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 TOR_KEY = os.getenv('TOR')
 
@@ -89,6 +89,6 @@ if __name__ == "__main__":
     while True:
         site = random.choice(sites)
         user_agent = random.choice(user_agents)
-        print (site + user_agent)
+        print (site + " " + user_agent)
         time.sleep(3)
        # load_threading(site, user_agent)
