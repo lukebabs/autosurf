@@ -3,11 +3,15 @@ from concurrent.futures import thread
 import _thread
 import threading
 import requests
-import time, re
+import time, os
 import random
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+load_dotenv()
+
+TOR_KEY = os.getenv('TOR')
 
 #List all sites to run requests against
 def site_list():
@@ -64,7 +68,7 @@ def use_requests(site):
 
 def switch_ip():
     with Controller.from_port(port = 9051) as controller:
-        controller.authenticate(password="hdfwgufbowhrh234fbhdg")
+        controller.authenticate(password=TOR_KEY) # Password is defined in .env file as TOR_KEY
         controller.signal(Signal.NEWNYM)
         controller.close()
 
