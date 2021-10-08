@@ -4,9 +4,11 @@ from pprint import pprint
 from zapv2 import ZAPv2
 from stem import Signal
 from stem.control import Controller
+from tor import SwitchIP
 
 def main():
-    se_lab = ['api.impervademo.com','api.topplayers.pro','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
+    se_lab = site_list()
+    # se_lab = ['api.impervademo.com','api.topplayers.pro','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
     # se_lab = ['api.impervademo.com','api.topplayers.pro']
     for site in se_lab:
         target = str("http://"+site)
@@ -22,7 +24,7 @@ def main():
         print('Accessing target {}'.format(target))
         zap.urlopen(target)
         # Give the sites tree a chance to get updated
-        switch_ip()
+        SwitchIP.switch_ip()
         time.sleep(2)
 
         print('Spidering target {}'.format(target))
@@ -32,7 +34,7 @@ def main():
         while (int(zap.spider.status(scanid)) < 100):
             # Loop until the spider has finished
             print('Spider progress %: {}'.format(zap.spider.status(scanid)))
-            switch_ip()
+            SwitchIP.switch_ip()
             time.sleep(2)
 
         print ('Spider completed')
@@ -48,7 +50,7 @@ def main():
         while (int(zap.ascan.status(scanid)) < 100):
             # Loop until the scanner has finished
             print ('Scan progress %: {}'.format(zap.ascan.status(scanid)))
-            switch_ip()
+            SwitchIP.switch_ip()
             time.sleep(5)
 
         print ('Active Scan completed')
@@ -58,15 +60,16 @@ def main():
         print ('Hosts: {}'.format(', '.join(zap.core.hosts)))
         print ('Alerts: ')
         pprint (zap.core.alerts())
-        switch_ip()
+        SwitchIP.switch_ip()
         time.sleep(300)
 
-def switch_ip():
-    with Controller.from_port(port = 9051) as controller:
-        controller.authenticate(password="hdfwgufbowhrh234fbhdg")
-        controller.signal(Signal.NEWNYM)
-        controller.close()
+def site_list():
+    with open('./data/sites.txt') as file:
+        sites = [site.strip() for site in file] #function to turn the txt file content into list
+    return sites
 
 if __name__ == "__main__":
-    while True:
-        main()
+    se_lab = site_list()
+    print (se_lab)
+    # while True:
+    #     main()
