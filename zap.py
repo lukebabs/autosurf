@@ -8,8 +8,8 @@ from tor import SwitchIP
 
 def main():
     se_lab = site_list()
-    # se_lab = ['api.impervademo.com','api.topplayers.pro','superveda.impervademo.com', 'acme.impervademo.com', 'isbt.impervademo.com']
     # se_lab = ['api.impervademo.com','api.topplayers.pro']
+    
     for site in se_lab:
         target = str("http://"+site)
         print (target)
@@ -70,6 +70,5 @@ def site_list():
 
 if __name__ == "__main__":
     se_lab = site_list()
-    print (se_lab)
-    # while True:
-    #     main()
+    while True:
+        main()
