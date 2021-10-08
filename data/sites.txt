@@ -1,5 +1,4 @@
 superveda.impervademo.com
 acme.impervademo.com
 isbt.impervademo.com
-www.futureauto.co
 api.topplayers.pro
