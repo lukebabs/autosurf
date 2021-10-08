@@ -62,7 +62,7 @@ def start_requests(sites, i):
     use_requests(sites)
 
 def load_threading():
-    #Setting up for threads to enhance request output
+    #Setting up for threading to enhance request output
     threads = list()
     for i in range(3):
         r = threading.Thread(target=start_requests, args=(random.choice(sites), 0))
