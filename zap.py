@@ -1,10 +1,14 @@
 #!/usr/bin/python3
-import time
+import time, os
 from pprint import pprint
 from zapv2 import ZAPv2
 from stem import Signal
 from stem.control import Controller
 from tor import SwitchIP
+from dotenv import load_dotenv
+load_dotenv()
+
+apikey = os.getenv('apikey') #Grab key from .env file
 
 def main():
     se_lab = site_list()
