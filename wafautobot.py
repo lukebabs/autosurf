@@ -5,6 +5,7 @@ import pandas as pd
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+from tor import SwitchIP
 
 __author__ = "Luke Babarinde"
 __credits__ = "Manny Liwanag"
@@ -182,7 +183,10 @@ def load_test(i):
     p = "http://"+proxy
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'}
     session = requests.Session()
-    session.proxies = p
+    # session.proxies = p
+    session.proxies = {}
+    session.proxies['http']='socks5h://localhost:9050'
+    session.proxies['https']='socks5h://localhost:9050'
     request = session.get(url, headers=headers, verify = True)
     print (f'No of requests: {i}', end = "\r")
     sys.stdout.flush()

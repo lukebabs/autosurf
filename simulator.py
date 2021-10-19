@@ -33,8 +33,8 @@ def surf():
     session = requests.session()
     # TO Request URL with SOCKS over TOR
     session.proxies = {}
-    session.proxies['http']='socks5h://10.147.18.180:9050'
-    session.proxies['https']='socks5h://10.147.18.180:9050'
+    session.proxies['http']='socks5h://localhost:9050'
+    session.proxies['https']='socks5h://localhost:9050'
     
     try:
         user_agent = pick_user_agent()
