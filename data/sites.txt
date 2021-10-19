@@ -2,3 +2,4 @@ superveda.impervademo.com
 acme.impervademo.com
 isbt.impervademo.com
 api.topplayers.pro
+api.impervademo.com

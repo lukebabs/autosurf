@@ -7,6 +7,7 @@ import random
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
+from tor import SwitchIP
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -26,7 +27,6 @@ def get_user_agents():
 
 def get_request(site):
     session = requests.session()
-
     # TO Request URL with SOCKS over TOR
     session.proxies = {}
     session.proxies['http']='socks5h://localhost:9050'
@@ -47,15 +47,15 @@ def use_requests(site):
     for i in range(5):
         result = get_request(site)
         print ("\n Session Cookie is " + str(result))
-        switch_ip()
+        SwitchIP.switch_ip()
         time.sleep(5)
 
 #This is the controller responsible for rotating TOR exit IP Address
-def switch_ip():
-    with Controller.from_port(port = 9051) as controller:
-        controller.authenticate(password=TOR_KEY) # Password is defined in .env file as TOR_KEY
-        controller.signal(Signal.NEWNYM)
-        controller.close()
+# def switch_ip():
+#     with Controller.from_port(port = 9051) as controller:
+#         controller.authenticate(password=TOR_KEY) # Password is defined in .env file as TOR_KEY
+#         controller.signal(Signal.NEWNYM)
+#         controller.close()
 
 def start_requests(sites, i):
     print ("Starting request for " +sites)

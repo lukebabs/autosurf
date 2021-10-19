@@ -1,6 +1,5 @@
 
 import os
-
 from stem import Signal
 from stem.control import Controller
 from dotenv import load_dotenv
