@@ -73,6 +73,6 @@ def site_list():
     return sites
 
 if __name__ == "__main__":
-    se_lab = random.choice(site_list())
+    site = random.choice(site_list())
     while True:
         main()
