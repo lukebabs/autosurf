@@ -11,10 +11,7 @@ load_dotenv()
 api_key = os.getenv('apikey') #Grab key from .env file
 
 def main():
-    # se_lab = site_list()
-    # se_lab = ['api.impervademo.com','api.topplayers.pro']
-    
-    # for site in se_lab:
+    site = site_select()
     target = str("http://"+site)
     print (target)
     apikey = api_key # Change to match the API key set in ZAP, or use None if the API key is disabled
@@ -72,7 +69,11 @@ def site_list():
         sites = [site.strip() for site in file] #function to turn the txt file content into list
     return sites
 
-if __name__ == "__main__":
+def site_select():
     site = random.choice(site_list())
+    return site
+
+if __name__ == "__main__":
     while True:
         main()
+
